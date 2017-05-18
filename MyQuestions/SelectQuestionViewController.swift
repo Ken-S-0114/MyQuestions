@@ -21,6 +21,9 @@ class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITab
     questionItem = realm.objects(RealmDB.self).sorted(byKeyPath: "id", ascending: true)
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+  }
+  
   @IBOutlet weak var questionTableView: UITableView!
   
   @IBAction func decisionButton(_ sender: UIBarButtonItem) {
@@ -36,7 +39,8 @@ class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITab
     // チェックマークを入れる
     cell?.accessoryType = .checkmark
     // 配列に指定した問題ID格納
-    selectId.append(contentsOf: [object.id])
+    selectId.append(object.id)
+    print(object.id)
   }
   
   // セルの選択が外れた時に呼び出される
@@ -46,6 +50,7 @@ class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITab
     // チェックマークを外す
     cell?.accessoryType = .none
     // 配列から指定の問題ID削除
+    print(object.id)
     selectId.remove(at: object.id)
   }
   

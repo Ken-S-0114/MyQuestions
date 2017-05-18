@@ -12,34 +12,46 @@ import RealmSwift
 class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
   
   var questionItem: Results<RealmDB>!
+  //var categoryItem: Results<CategoryList>!
   // Pickerに格納されている文字列
-  var categoryString: NSArray = ["時事問題", "数学"]
+  var categoryString: [String] = []
   // Pickerで選択した文字列の格納場所
   var didCategorySelect = String()
   // TableViewで選択されたデータのID
   var selectedId = Int()
-  
+  var selectedCategoryId = Int()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    reset()
     // Do any additional setup after loading the view.
     let realm = try! Realm()
+    let realmc = try! Realm()
     questionItem = realm.objects(RealmDB.self)
+    //categoryItem = realmc.objects(CategoryList.self)
     // 選択されたIDからRealmDBに保存してあるデータを表示
     let editRealmDB = realm.object(ofType: RealmDB.self, forPrimaryKey: selectedId as AnyObject)
     titleTextView.text? = (editRealmDB?.title)!
     questionTextView.text? = (editRealmDB?.question)!
     answerTextView.text? = (editRealmDB?.answer)!
-    // 特定の文字列を検索、何個目かをInt型として返す
-    let setCategory: Int = categoryString.index(of: editRealmDB?.category as Any)
-    categoryPickerView.selectRow(setCategory, inComponent: 0, animated: false)
+    
+    //let editCategoryList = realmc.objects(CategoryList.self).value(forKey: "categorylist")
+//    let categoryString = editCategoryList as? [String]
+//    
+//    // 特定の文字列を検索、何個目かをInt型として返す
+//    let setCategory: Int = categoryString!.index(of: editCategoryList as! String)!
+//    categoryPickerView.selectRow(setCategory, inComponent: 0, animated: false)
+//    
     didCategorySelect = (editRealmDB?.category)!
+    nowLabel.text? = (editRealmDB?.level)!
+
   }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
+  
   
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var questionLabel: UILabel!
@@ -53,8 +65,16 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
   @IBOutlet weak var answerTextView: UITextField!
   @IBOutlet weak var categoryPickerView: UIPickerView!
   
+  @IBAction func addCategory(_ sender: Any) {
+    performSegue(withIdentifier: "addCategorySegue", sender: nil)
+  }
+  
   @IBAction func levelSlider(_ sender: UISlider) {
     nowLabel.text = String(Int(sender.value))
+  }
+  
+  @IBAction func tapScreen(_ sender: Any) {
+    self.view.endEditing(true)
   }
   
   // 列数
@@ -67,11 +87,11 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
   }
   // セルに表示
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return categoryString[row] as? String
+    return categoryString[row]
   }
   // セルを選択
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    didCategorySelect = (categoryString[row] as? String)!
+    didCategorySelect = (categoryString[row])
   }
   
   // データの上書き保存
@@ -83,8 +103,8 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     editRealmDB.question = questionTextView.text!
     editRealmDB.answer = answerTextView.text!
     editRealmDB.category = didCategorySelect
+    editRealmDB.level = nowLabel.text!
     editRealmDB.id = selectedId
-    //editRealmDB.level =
     
     // 上記で代入したテキストデータを永続化
       let realm = try! Realm()
@@ -98,7 +118,6 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     alertController.addAction(alertAction)
     present(alertController, animated: true, completion: nil)
     dismiss(animated: true, completion: nil)
-    reset()
   }
   
   // 入力項目を全てリセット

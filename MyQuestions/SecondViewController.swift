@@ -12,8 +12,10 @@ import RealmSwift
 class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
   
   var questionItem: Results<RealmDB>!
+  //var categoryItem: Results<CategoryList>!
+  
   // Pickerに格納されている文字列
-  var categoryString: NSArray = ["選択してください", "時事問題", "数学"]
+  var categoryString: [String] = []
   // Pickerで選択した文字列の格納場所
   var didCategorySelect = String()
   // TableViewで選択したデータのIDの格納場所
@@ -23,10 +25,18 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     let realm = try! Realm()
+    let realmc = try! Realm()
     questionItem = realm.objects(RealmDB.self)
-    categoryPickerView.selectRow(0, inComponent: 0, animated: false)
-    didCategorySelect = categoryString[0] as! String
+//    categoryItem = realmc.objects(CategoryList.self)
+//    let editCategoryList = realmc.objects(CategoryList.self).value(forKey: "categorylist")
+//    let categoryString = editCategoryList as? [String]
+//    categoryPickerView.selectRow(0, inComponent: 0, animated: false)
+//    if let categoryString = categoryString {
+//      didCategorySelect = categoryString[0]
+//    }
     nowLevel.text = "5"
+    
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -66,11 +76,11 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
   }
   // pickerViewのセルを表示
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return categoryString[row] as? String
+    return categoryString[row]
   }
   // pickerViewのセルを選択
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    didCategorySelect = (categoryString[row] as? String)!
+    didCategorySelect = (categoryString[row])
   }
   
   // データを保存
@@ -99,7 +109,7 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
         realm.add(newRealmDB, update: false)
       })
       // 保存したことを知らせるアラート表示
-      let alertController = UIAlertController(title: "保存しました", message: nil, preferredStyle: .alert)
+      let alertController = UIAlertController(title: "保存しました", message: "問題一覧に戻ります", preferredStyle: .alert)
       let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
       alertController.addAction(alertAction)
       present(alertController, animated: true, completion: nil)

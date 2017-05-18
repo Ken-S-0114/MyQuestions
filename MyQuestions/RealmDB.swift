@@ -11,7 +11,7 @@ import RealmSwift
 
 class RealmDB: Object {
     
-  dynamic var id = 0
+  dynamic var id: Int = 0
   dynamic var title = String()
   dynamic var question = String()
   dynamic var answer = String()
@@ -24,3 +24,12 @@ class RealmDB: Object {
   }
   
 }
+
+//class CategoryList: Object {
+//  dynamic var id: Int = 0
+//  dynamic var categorylist: [String] = []
+//  
+//  override static func primaryKey() -> String? {
+//    return "id"
+//  }
+//}
