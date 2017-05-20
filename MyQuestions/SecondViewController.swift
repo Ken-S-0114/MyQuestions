@@ -12,10 +12,10 @@ import RealmSwift
 class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
   
   var questionItem: Results<RealmDB>!
-  //var categoryItem: Results<CategoryList>!
+//  var categoryItem: Results<CategoryList>!
   
   // Pickerに格納されている文字列
-  var categoryString: [String] = []
+  var categoryString: [String?] = ["国語","数学", "社会", "理科", "英語"]
   // Pickerで選択した文字列の格納場所
   var didCategorySelect = String()
   // TableViewで選択したデータのIDの格納場所
@@ -25,10 +25,10 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     let realm = try! Realm()
-    let realmc = try! Realm()
     questionItem = realm.objects(RealmDB.self)
-//    categoryItem = realmc.objects(CategoryList.self)
-//    let editCategoryList = realmc.objects(CategoryList.self).value(forKey: "categorylist")
+//    categoryItem = realm.objects(CategoryList.self)
+    
+//    let editCategoryList = realm.objects(CategoryList.self).value(forKey: "categoryname")
 //    let categoryString = editCategoryList as? [String]
 //    categoryPickerView.selectRow(0, inComponent: 0, animated: false)
 //    if let categoryString = categoryString {
@@ -80,8 +80,17 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
   }
   // pickerViewのセルを選択
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    didCategorySelect = (categoryString[row])
+    didCategorySelect = (categoryString[row])!
   }
+  
+//  func createRealmDB(name: String, category: [String]){
+//    let categoryList = List<CategoryList>()
+//    for categorys in category {
+//      let newCategory = CategoryList()
+//      newCategory.categorylist = categorys
+//      categoryList.append(newCategory)
+//    }
+//  }
   
   // データを保存
   @IBAction func saveButton(_ sender: Any) {

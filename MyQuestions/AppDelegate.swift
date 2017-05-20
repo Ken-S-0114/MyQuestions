@@ -14,8 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   var selectId: [Int] = []
   var limit = Int()
-  var correct = Int()
-  var wrong = Int()
+  var correct: Int = 0
+  var wrong: Int = 0
+  var mark: [String] = []
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
    

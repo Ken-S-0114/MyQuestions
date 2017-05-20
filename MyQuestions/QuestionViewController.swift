@@ -11,7 +11,6 @@ import RealmSwift
 
 class QuestionViewController: UIViewController {
 
-  
   var questionItem: Results<RealmDB>!
   var selectId: [Int] = []
   var selectAnswer: String?
@@ -19,7 +18,7 @@ class QuestionViewController: UIViewController {
   var limitCount: Int = 1
   var correct: Int = 0
   var wrong: Int = 0
-  
+  var mark: [String] = []
   var i: Int = 0
   
   
@@ -31,11 +30,9 @@ class QuestionViewController: UIViewController {
     limitCount = appDelegate.limit
     
     let realm = try! Realm()
-    questionItem = realm.objects(RealmDB.self)
     // 選択されたIDからRealmDBに保存してあるデータを表示
-
     let selectRealmDB = realm.object(ofType: RealmDB.self, forPrimaryKey: selectId[i] as AnyObject)
-    categoryLabel.text? = (selectRealmDB?.category)!
+    //categoryLabel.text? = (selectRealmDB?.category)!
     titleLabel.text? = (selectRealmDB?.title)!
     questionLabel.text? = (selectRealmDB?.question)!
     levelLabel.text? = ("難易度: \((selectRealmDB?.level)!)")
@@ -43,6 +40,9 @@ class QuestionViewController: UIViewController {
     answerTextField.text = ""
     // Realmに格納してある特定の答え
     selectAnswer = (selectRealmDB?.answer)!
+    
+    checkButtonView.isEnabled = true
+    nextQuestionButtonView.isEnabled = false
   }
   
   override func didReceiveMemoryWarning() {
@@ -66,14 +66,19 @@ class QuestionViewController: UIViewController {
   @IBOutlet weak var answerLabelView: UILabel!
   @IBOutlet weak var answerTextField: UITextField!
   @IBOutlet weak var levelLabel: UILabel!
+  @IBOutlet weak var nextQuestionButtonView: UIBarButtonItem!
+  @IBOutlet weak var checkButtonView: UIButton!
 
   @IBAction func nextQuestionButton(_ sender: Any) {
     if (i < selectId.count) {
+      // 画面の再表示
       viewDidLoad()
     }else {
-      let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate //AppDelegateのインスタンスを取得
+      //AppDelegateのインスタンスを取得
+      let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
       appDelegate.correct = correct
       appDelegate.wrong = wrong
+      appDelegate.mark = mark
       performSegue(withIdentifier: "resultSegue", sender: nil)
     }
 
@@ -81,15 +86,26 @@ class QuestionViewController: UIViewController {
   
   // 答え合わせ
   @IBAction func checkButton(_ sender: Any) {
-    // 答えが入力されているか確認
+    let resultRealmDB = RealmDB()
+    
+       // 答えが入力されているか確認
     if (answerTextField.text != "") {
-      // 正解
+      // 正解の場合
       if (answerTextField.text == selectAnswer!) {
         let alertController = UIAlertController(title: "正解", message: nil, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(alertAction)
         correct += 1
+        mark += ["○"];
         present(alertController, animated: true, completion: nil)
+        
+        // resultRealmDBに結果を蓄積
+        resultRealmDB.id = selectId[i]
+        resultRealmDB.correctmark += 1
+        
+        // ボタンの表示を操作
+        checkButtonView.isEnabled = false
+        nextQuestionButtonView.isEnabled = true
       }
       // 答えが間違っている場合
       else if (answerTextField.text != selectAnswer!) {
@@ -105,21 +121,34 @@ class QuestionViewController: UIViewController {
           let alertAction = UIAlertAction(title: "確認", style: .default, handler: nil)
           alertController.addAction(alertAction)
           wrong += 1
+          mark += ["×"];
           present(alertController, animated: true, completion: nil)
+          
+          // resultRealmDBに結果を蓄積
+          resultRealmDB.id = selectId[i]
+          resultRealmDB.wrongmark += 1
+          
+          // ボタンの表示を操作
+          checkButtonView.isEnabled = false
+          nextQuestionButtonView.isEnabled = true
         }
       }
-    // 答えが未入力
+    // 答えが未入力の場合
     else {
       let alertController = UIAlertController(title: "答えが入力されていません", message: nil, preferredStyle: .alert)
       let alertAction = UIAlertAction(title: "もう一度", style: .default, handler: nil)
       alertController.addAction(alertAction)
       present(alertController, animated: true, completion: nil)
-      }
     }
-    // 次のIdへ
+    // 上記で代入したテキストデータを永続化
+    let realm = try! Realm()
+    try! realm.write({ () -> Void in
+      realm.add(resultRealmDB, update: true)
+    })
+
+  }
+    // 次の問題準備
     i += 1
-    print(i)
-    print(selectId.count)
   }
   
   

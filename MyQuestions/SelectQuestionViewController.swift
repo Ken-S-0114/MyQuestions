@@ -13,6 +13,7 @@ class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITab
   
   var questionItem: Results<RealmDB>!
   var selectId: [Int] = []
+  var selectedCells:[String:Bool]=[String:Bool]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,8 +22,18 @@ class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITab
     questionItem = realm.objects(RealmDB.self).sorted(byKeyPath: "id", ascending: true)
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-  }
+//  override func viewWillAppear(_ animated: Bool) {
+//    let cell = self.questionTableView.dequeueReusableCellWithIdentifier("selectCell") as! selectCell
+//    let indexPath = self.questionTableView.indexPath(for: questionTableView)
+//    let key = "\(indexPath.section)-\(indexPath.row)"
+//    if let selected = selectedCells[key]{
+//      cell.accessoryType=UITableViewCellAccessoryType.Checkmark
+//    }else{
+//      cell.accessoryType=UITableViewCellAccessoryType.None
+//    }
+//    
+//    return cell
+//  }
   
   @IBOutlet weak var questionTableView: UITableView!
   
@@ -40,7 +51,6 @@ class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITab
     cell?.accessoryType = .checkmark
     // 配列に指定した問題ID格納
     selectId.append(object.id)
-    print(object.id)
   }
   
   // セルの選択が外れた時に呼び出される
@@ -49,9 +59,9 @@ class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITab
     let object = questionItem[indexPath.row]
     // チェックマークを外す
     cell?.accessoryType = .none
-    // 配列から指定の問題ID削除
-    print(object.id)
-    selectId.remove(at: object.id)
+    // 配列に指定した問題ID削除
+    _ = selectId.remove(element: object.id)
+
   }
   
   // セルの数を返す
@@ -64,7 +74,7 @@ class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITab
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: "selectCell", for: indexPath)
     let object = questionItem[indexPath.row]
     cell.textLabel?.text = object.category
     
@@ -72,5 +82,20 @@ class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITab
     cell.selectionStyle = UITableViewCellSelectionStyle.none
     return cell
   }
+
+}
+
+// 削除する際に使用(選択したセルに格納されている値と一致する値のみ削除）
+extension Array where Element: Equatable {
+  mutating func remove(element: Element) -> Bool {
+    guard let index = index(of: element) else { return false }
+    remove(at: index)
+    return true
+  }
   
+  mutating func remove(elements: [Element]) {
+    for element in elements {
+      _ = remove(element: element)
+    }
+  }
 }

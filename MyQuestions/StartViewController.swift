@@ -28,9 +28,9 @@ class StartViewController: UIViewController, UINavigationControllerDelegate, UII
   override func viewWillAppear(_ animated: Bool) {
     let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate //AppDelegateのインスタンスを取得
     selectId = appDelegate.selectId
-    selectIdLabel.text! = selectId.description
+    selectIdLabel.text! = "問題数：\(selectId.count)問"
     // 問題が選択している場合
-    if (selectId.isEmpty == true) {
+    if (selectId.isEmpty == false) {
       // ボタン操作を有効
       startButtonView.isEnabled = true
     }
@@ -49,7 +49,9 @@ class StartViewController: UIViewController, UINavigationControllerDelegate, UII
   }
   
   @IBAction func startButton(_ sender: Any) {
-    performSegue(withIdentifier: "testSegue", sender: nil)
+    if (selectId.isEmpty == false) {
+      performSegue(withIdentifier: "testSegue", sender: nil)
+    }
   }
   
   func pickImageFromLibrary() {

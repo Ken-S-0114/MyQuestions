@@ -14,7 +14,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
   var questionItem: Results<RealmDB>!
   //var categoryItem: Results<CategoryList>!
   // Pickerに格納されている文字列
-  var categoryString: [String] = []
+  var categoryString: [String?] = ["国語","数学", "社会", "理科", "英語"]
   // Pickerで選択した文字列の格納場所
   var didCategorySelect = String()
   // TableViewで選択されたデータのID
@@ -26,23 +26,22 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     reset()
     // Do any additional setup after loading the view.
     let realm = try! Realm()
-    let realmc = try! Realm()
     questionItem = realm.objects(RealmDB.self)
-    //categoryItem = realmc.objects(CategoryList.self)
+//    categoryItem = realm.objects(CategoryList.self)
     // 選択されたIDからRealmDBに保存してあるデータを表示
     let editRealmDB = realm.object(ofType: RealmDB.self, forPrimaryKey: selectedId as AnyObject)
     titleTextView.text? = (editRealmDB?.title)!
     questionTextView.text? = (editRealmDB?.question)!
     answerTextView.text? = (editRealmDB?.answer)!
     
-    //let editCategoryList = realmc.objects(CategoryList.self).value(forKey: "categorylist")
+//    let editCategoryList = realm.objects(CategoryList.self).value(forKey: "categorylist")
 //    let categoryString = editCategoryList as? [String]
 //    
 //    // 特定の文字列を検索、何個目かをInt型として返す
 //    let setCategory: Int = categoryString!.index(of: editCategoryList as! String)!
 //    categoryPickerView.selectRow(setCategory, inComponent: 0, animated: false)
 //    
-    didCategorySelect = (editRealmDB?.category)!
+//    didCategorySelect = (editRealmDB?.category)!
     nowLabel.text? = (editRealmDB?.level)!
 
   }
@@ -91,7 +90,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
   }
   // セルを選択
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    didCategorySelect = (categoryString[row])
+    didCategorySelect = (categoryString[row])!
   }
   
   // データの上書き保存
