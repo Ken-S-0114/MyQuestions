@@ -12,8 +12,7 @@ import RealmSwift
 class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   
   var questionItem: Results<RealmDB>!
-  var selectId: [Int] = []
-  var selectedCells:[String:Bool]=[String:Bool]()
+  var selectId: [Int] = []  // 選択された問題番号
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,24 +20,13 @@ class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITab
     let realm = try! Realm()
     questionItem = realm.objects(RealmDB.self).sorted(byKeyPath: "id", ascending: true)
   }
-  
-//  override func viewWillAppear(_ animated: Bool) {
-//    let cell = self.questionTableView.dequeueReusableCellWithIdentifier("selectCell") as! selectCell
-//    let indexPath = self.questionTableView.indexPath(for: questionTableView)
-//    let key = "\(indexPath.section)-\(indexPath.row)"
-//    if let selected = selectedCells[key]{
-//      cell.accessoryType=UITableViewCellAccessoryType.Checkmark
-//    }else{
-//      cell.accessoryType=UITableViewCellAccessoryType.None
-//    }
-//    
-//    return cell
-//  }
+
   
   @IBOutlet weak var questionTableView: UITableView!
   
   @IBAction func decisionButton(_ sender: UIBarButtonItem) {
-    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate //AppDelegateのインスタンスを取得
+    // AppDelegateのインスタンスを取得
+    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
     appDelegate.selectId = selectId //appDelegateの変数を操作
     _ = navigationController?.popViewController(animated: true)
   }
@@ -76,7 +64,7 @@ class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITab
     
     let cell = tableView.dequeueReusableCell(withIdentifier: "selectCell", for: indexPath)
     let object = questionItem[indexPath.row]
-    cell.textLabel?.text = object.category
+    cell.textLabel?.text = object.title
     
     // セルが選択された時の背景色を消す
     cell.selectionStyle = UITableViewCellSelectionStyle.none

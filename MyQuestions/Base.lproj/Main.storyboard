@@ -27,15 +27,15 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="questionCell" textLabel="SIB-5Q-JXO" style="IBUITableViewCellStyleDefault" id="Iai-V3-g94">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="questionCell" textLabel="SIB-5Q-JXO" style="IBUITableViewCellStyleDefault" id="Iai-V3-g94">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Iai-V3-g94" id="Gom-1Z-56Z">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SIB-5Q-JXO">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -262,10 +262,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEY-Nf-d7M">
-                                <rect key="frame" x="299" y="347.5" width="30" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="+"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEY-Nf-d7M">
+                                <rect key="frame" x="307" y="360.5" width="22" height="22"/>
                                 <connections>
                                     <action selector="addCategory:" destination="zPS-5O-FTX" eventType="touchUpInside" id="OK2-aS-FOh"/>
                                 </connections>
@@ -342,7 +340,7 @@
                         <outlet property="questionTextView" destination="WIF-fM-END" id="WMM-hR-o4v"/>
                         <outlet property="titleLabel" destination="YMC-CE-Yrm" id="h8Y-P9-lQI"/>
                         <outlet property="titleTextView" destination="gHu-Hk-zbs" id="xiP-aQ-Xmi"/>
-                        <segue destination="SQb-Gk-p5P" kind="show" identifier="addCategorySegue" id="gfg-sS-JTd"/>
+                        <segue destination="SQb-Gk-p5P" kind="show" identifier="addCategorySegue2" id="gfg-sS-JTd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uQA-Pt-WGI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -492,6 +490,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGr-Ud-Tuz">
+                                <rect key="frame" x="317" y="292" width="22" height="30"/>
+                                <connections>
+                                    <action selector="addCategoryButton:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="h2N-Tq-Typ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -507,10 +511,12 @@
                             <constraint firstAttribute="trailingMargin" secondItem="IQi-8c-2I9" secondAttribute="trailing" constant="200" id="9b3-K4-d7g"/>
                             <constraint firstAttribute="trailing" secondItem="4PU-Qh-Na0" secondAttribute="trailing" constant="20" id="BKj-8n-B9m"/>
                             <constraint firstItem="4PU-Qh-Na0" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="DgQ-x3-c61"/>
+                            <constraint firstItem="XGr-Ud-Tuz" firstAttribute="top" secondItem="7sZ-m6-AID" secondAttribute="bottom" constant="5" id="E6Z-9j-nIk"/>
                             <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="rK9-ht-Mhe" secondAttribute="bottom" constant="30" id="F9h-Zd-30C"/>
                             <constraint firstAttribute="trailingMargin" secondItem="XNA-h9-rhV" secondAttribute="trailing" constant="20" id="ILI-s0-lSK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oDE-JM-Koc" secondAttribute="trailing" constant="20" id="Jc1-4U-gCO"/>
                             <constraint firstItem="z6Y-B0-fLh" firstAttribute="top" secondItem="oDE-JM-Koc" secondAttribute="bottom" constant="5" id="LCe-kU-Szp"/>
+                            <constraint firstItem="XGr-Ud-Tuz" firstAttribute="centerY" secondItem="IQi-8c-2I9" secondAttribute="centerY" id="LnS-pk-Mw0"/>
                             <constraint firstItem="pEV-CY-MlX" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" constant="20" id="M2r-HQ-dmy"/>
                             <constraint firstItem="90s-IV-vqq" firstAttribute="top" secondItem="z6Y-B0-fLh" secondAttribute="bottom" constant="10" id="Qq4-el-55B"/>
                             <constraint firstItem="ZcY-1i-0CQ" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" constant="100" id="QrW-41-bOn"/>
@@ -532,6 +538,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="bvg-WI-bWC" secondAttribute="trailing" constant="20" id="p3G-sr-sG1"/>
                             <constraint firstAttribute="trailingMargin" secondItem="z6Y-B0-fLh" secondAttribute="trailing" constant="20" id="r2K-6p-CEK"/>
                             <constraint firstItem="XNA-h9-rhV" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" constant="20" id="uU0-4p-nRa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XGr-Ud-Tuz" secondAttribute="trailing" constant="20" id="w77-SK-eSL"/>
                             <constraint firstItem="4PU-Qh-Na0" firstAttribute="top" secondItem="IQi-8c-2I9" secondAttribute="bottom" id="xAQ-Jj-kGQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="pEV-CY-MlX" secondAttribute="trailing" constant="20" id="xD0-ZQ-Dmm"/>
                             <constraint firstItem="oDE-JM-Koc" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" constant="20" id="xu6-0J-z8f"/>
@@ -596,7 +603,7 @@
         <scene sceneID="58Y-Nc-iX2">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bVd-gM-BPu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Question List" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Question List" image="first" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QFe-XX-qmO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -774,13 +781,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ジャンル" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbi-yg-tL1">
-                                <rect key="frame" x="36" y="94" width="223" height="36"/>
+                                <rect key="frame" x="36" y="94" width="223" height="21.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enN-oS-g9e">
-                                <rect key="frame" x="36" y="151" width="90" height="21"/>
+                                <rect key="frame" x="36" y="136.5" width="90" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="75X-BN-64V"/>
                                     <constraint firstAttribute="width" constant="90" id="ial-XY-yP4"/>
@@ -790,19 +797,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="タイトル" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N27-Yd-Sfz">
-                                <rect key="frame" x="36" y="150" width="303" height="20.5"/>
+                                <rect key="frame" x="36" y="135.5" width="303" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="問題：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SqX-iJ-mj1">
-                                <rect key="frame" x="36" y="192" width="303" height="18"/>
+                                <rect key="frame" x="36" y="177.5" width="303" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="問題文" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Htm-ZA-tLT">
-                                <rect key="frame" x="36" y="220" width="303" height="100"/>
+                                <rect key="frame" x="36" y="205.5" width="303" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Yms-3L-rKT"/>
                                 </constraints>
@@ -811,13 +818,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="答え：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPa-c2-YgS">
-                                <rect key="frame" x="36" y="340" width="303" height="18"/>
+                                <rect key="frame" x="36" y="325.5" width="303" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="答えを入力してください" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sno-6o-KJi">
-                                <rect key="frame" x="36" y="368" width="303" height="30"/>
+                                <rect key="frame" x="36" y="353.5" width="303" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -833,9 +840,15 @@
                                     <action selector="checkButton:" destination="IQT-dD-6xg" eventType="touchUpInside" id="ueu-4B-Di3"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="難易度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pR-KE-rxy">
-                                <rect key="frame" x="269" y="104" width="70" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pR-KE-rxy">
+                                <rect key="frame" x="331" y="94.5" width="8" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="難易度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gg6-qs-hdd">
+                                <rect key="frame" x="272.5" y="96" width="61.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -843,7 +856,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="cbi-yg-tL1" secondAttribute="trailing" constant="100" id="0Ew-11-jhc"/>
-                            <constraint firstItem="4pR-KE-rxy" firstAttribute="top" secondItem="P6M-JV-Mo9" secondAttribute="bottom" constant="40" id="0gM-q3-2GX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="SqX-iJ-mj1" secondAttribute="trailing" constant="20" id="4dE-iX-d8A"/>
                             <constraint firstAttribute="trailingMargin" secondItem="rNO-P3-kSd" secondAttribute="trailing" constant="100" id="58h-3K-7w8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Htm-ZA-tLT" secondAttribute="trailing" constant="20" id="5da-k5-Mb0"/>
@@ -855,7 +867,10 @@
                             <constraint firstItem="enN-oS-g9e" firstAttribute="top" secondItem="cbi-yg-tL1" secondAttribute="bottom" constant="21" id="Ikw-5k-kBA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="pPa-c2-YgS" secondAttribute="trailing" constant="20" id="JtB-Lh-b24"/>
                             <constraint firstItem="Jtc-0h-YwN" firstAttribute="top" secondItem="rNO-P3-kSd" secondAttribute="bottom" constant="30" id="Kla-e8-fpn"/>
+                            <constraint firstItem="Gg6-qs-hdd" firstAttribute="centerY" secondItem="cbi-yg-tL1" secondAttribute="centerY" id="Mom-X6-b7R"/>
                             <constraint firstItem="cbi-yg-tL1" firstAttribute="leading" secondItem="ZLP-7s-BH7" secondAttribute="leadingMargin" constant="20" id="PNm-sj-Dlz"/>
+                            <constraint firstItem="4pR-KE-rxy" firstAttribute="centerY" secondItem="cbi-yg-tL1" secondAttribute="centerY" id="Tsz-ta-Pju"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Gg6-qs-hdd" secondAttribute="trailing" constant="25" id="V5Z-tp-ayC"/>
                             <constraint firstItem="rNO-P3-kSd" firstAttribute="leading" secondItem="ZLP-7s-BH7" secondAttribute="leadingMargin" constant="100" id="ZmD-ZG-ZNV"/>
                             <constraint firstItem="Sno-6o-KJi" firstAttribute="top" secondItem="pPa-c2-YgS" secondAttribute="bottom" constant="10" id="bSn-Rg-YpN"/>
                             <constraint firstItem="SqX-iJ-mj1" firstAttribute="top" secondItem="enN-oS-g9e" secondAttribute="bottom" constant="20" id="fnM-Lm-Zgh"/>
@@ -864,11 +879,9 @@
                             <constraint firstItem="N27-Yd-Sfz" firstAttribute="top" secondItem="cbi-yg-tL1" secondAttribute="bottom" constant="20" id="l6e-vh-VqN"/>
                             <constraint firstItem="pPa-c2-YgS" firstAttribute="leading" secondItem="ZLP-7s-BH7" secondAttribute="leadingMargin" constant="20" id="mT8-Io-LKy"/>
                             <constraint firstItem="Htm-ZA-tLT" firstAttribute="leading" secondItem="ZLP-7s-BH7" secondAttribute="leadingMargin" constant="20" id="mbr-le-4bn"/>
-                            <constraint firstItem="4pR-KE-rxy" firstAttribute="leading" secondItem="cbi-yg-tL1" secondAttribute="trailing" constant="10" id="p20-9c-HW5"/>
                             <constraint firstItem="Htm-ZA-tLT" firstAttribute="top" secondItem="SqX-iJ-mj1" secondAttribute="bottom" constant="10" id="v86-No-Qrz"/>
                             <constraint firstItem="Sno-6o-KJi" firstAttribute="leading" secondItem="ZLP-7s-BH7" secondAttribute="leadingMargin" constant="20" id="xZT-Vj-oye"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Sno-6o-KJi" secondAttribute="trailing" constant="20" id="yHF-Ub-myR"/>
-                            <constraint firstItem="4pR-KE-rxy" firstAttribute="centerY" secondItem="cbi-yg-tL1" secondAttribute="centerY" id="yQN-uu-ZZh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="テスト" id="bid-d4-nea">
@@ -884,6 +897,7 @@
                         <outlet property="categoryLabel" destination="cbi-yg-tL1" id="eSd-UZ-Kdb"/>
                         <outlet property="checkButtonView" destination="rNO-P3-kSd" id="hxM-X8-EQI"/>
                         <outlet property="levelLabel" destination="4pR-KE-rxy" id="kP3-YR-MWt"/>
+                        <outlet property="levelLabelView" destination="Gg6-qs-hdd" id="uLk-dY-8BR"/>
                         <outlet property="nextQuestionButtonView" destination="rUm-Tj-gzO" id="FYe-Iy-nL8"/>
                         <outlet property="questionLabel" destination="Htm-ZA-tLT" id="VAm-UX-se1"/>
                         <outlet property="questionLabelView" destination="SqX-iJ-mj1" id="NI2-qS-KZR"/>
@@ -893,7 +907,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LVV-0w-AEk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1150" y="2122"/>
+            <point key="canvasLocation" x="1149.5999999999999" y="2121.5892053973016"/>
         </scene>
         <!--結果-->
         <scene sceneID="zSF-yS-kz6">
@@ -1026,6 +1040,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>

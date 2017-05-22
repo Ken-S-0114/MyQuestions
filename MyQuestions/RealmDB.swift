@@ -16,7 +16,6 @@ class RealmDB: Object {
   dynamic var question: String = ""
   dynamic var answer: String = ""
   dynamic var category: String = ""
-//  let categorylist = List<CategoryList>()
   dynamic var level: String = ""
   dynamic var correctmark: Int = 0
   dynamic var wrongmark: Int = 0
@@ -26,13 +25,4 @@ class RealmDB: Object {
     return "id"
   }
   
-}
-
-class CategoryList: Object {
-  dynamic var id: Int = 0
-  dynamic var categoryname: String = ""
-  
-  override static func primaryKey() -> String? {
-    return "id"
-  }
 }

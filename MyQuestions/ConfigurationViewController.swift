@@ -10,8 +10,8 @@ import UIKit
 
 class ConfigurationViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource  {
   
-  var limitCounter: [Int] = ([Int])(1...5)
-  var limit: Int = 1
+  var limitCounter: [Int] = ([Int])(1...5)  // 回答回数を選択
+  var limit: Int = 1                        // 回答回数
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,6 @@ class ConfigurationViewController: UIViewController, UIPickerViewDelegate, UIPic
   @IBAction func decisionButton(_ sender: Any) {
     let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate //AppDelegateのインスタンスを取得
     appDelegate.limit = limit//appDelegateの変数を操作
-    print(limit)
     _ = navigationController?.popViewController(animated: true)
   }
 

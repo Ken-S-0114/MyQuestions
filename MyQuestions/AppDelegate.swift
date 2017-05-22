@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var correct: Int = 0
   var wrong: Int = 0
   var mark: [String] = []
+  var pop = String()
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
    

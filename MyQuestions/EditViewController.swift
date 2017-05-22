@@ -12,43 +12,92 @@ import RealmSwift
 class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
   
   var questionItem: Results<RealmDB>!
-  //var categoryItem: Results<CategoryList>!
+  var categoryItem: Results<CategoryDB>!
+  var count: Int = 0      // CategoryDBに保存してあるデータ数
+  var l: Int = 0          // UIPickerの初期位置を格納
+  var i: Int = 0          // 比較する変数
+
+  
   // Pickerに格納されている文字列
-  var categoryString: [String?] = ["国語","数学", "社会", "理科", "英語"]
+  var categoryString: [String?] = []
   // Pickerで選択した文字列の格納場所
   var didCategorySelect = String()
   // TableViewで選択されたデータのID
   var selectedId = Int()
-  var selectedCategoryId = Int()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     reset()
     // Do any additional setup after loading the view.
     let realm = try! Realm()
+    let realms = try! Realm()
+    
     questionItem = realm.objects(RealmDB.self)
-//    categoryItem = realm.objects(CategoryList.self)
+    categoryItem = realms.objects(CategoryDB.self)
+    
     // 選択されたIDからRealmDBに保存してあるデータを表示
     let editRealmDB = realm.object(ofType: RealmDB.self, forPrimaryKey: selectedId as AnyObject)
-    titleTextView.text? = (editRealmDB?.title)!
-    questionTextView.text? = (editRealmDB?.question)!
-    answerTextView.text? = (editRealmDB?.answer)!
+    titleTextView.text = editRealmDB?.title
+    questionTextView.text = editRealmDB?.question
+    answerTextView.text = editRealmDB?.answer
+    if let category = editRealmDB?.category {
+      didCategorySelect = category
+    }
+    nowLabel.text = editRealmDB?.level
     
-//    let editCategoryList = realm.objects(CategoryList.self).value(forKey: "categorylist")
-//    let categoryString = editCategoryList as? [String]
-//    
-//    // 特定の文字列を検索、何個目かをInt型として返す
-//    let setCategory: Int = categoryString!.index(of: editCategoryList as! String)!
-//    categoryPickerView.selectRow(setCategory, inComponent: 0, animated: false)
-//    
-//    didCategorySelect = (editRealmDB?.category)!
-    nowLabel.text? = (editRealmDB?.level)!
+    // Picker処理
+    count = categoryItem.count
+    // CategoryDBに保存してある値を配列に格納
+    while count>i {
+      let object = categoryItem[i]
+      categoryString += [object.name]
+      if(didCategorySelect == object.name) {
+        // 同じジャンル名の配列番号記憶
+        l = i
+      }
+      i += 1
+    }
+    // 初期位置セット
+    categoryPickerView.selectRow(l, inComponent: 0, animated: true)
+    categoryPickerView.reloadAllComponents()
+    // 比較する変数の初期化
+    i = 0
 
   }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    let realms = try! Realm()
+    categoryItem = realms.objects(CategoryDB.self)
+    // 変更後の数
+    let recount: Int = categoryItem.count
+    // 変更前の数と比べる
+    if(recount != count){
+      // 配列の中身を初期化
+      categoryString = []
+      // CategoryDBに保存してある値を配列にあるだけ再度格納
+      while recount>i {
+        let object = categoryItem[i]
+        categoryString += [object.name]
+        if(didCategorySelect == object.name) {
+          // 同じジャンル名の配列番号記憶
+          l = i
+        }
+        i += 1
+      }
+      i = 0
+      // 個数更新
+      count = recount
+      // 初期位置セット
+      categoryPickerView.selectRow(l, inComponent: 0, animated: true)
+      categoryPickerView.reloadAllComponents()
+    }
   }
   
   
@@ -65,7 +114,9 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
   @IBOutlet weak var categoryPickerView: UIPickerView!
   
   @IBAction func addCategory(_ sender: Any) {
-    performSegue(withIdentifier: "addCategorySegue", sender: nil)
+    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate //AppDelegateのインスタンスを取得
+    appDelegate.pop = "Edit"
+    performSegue(withIdentifier: "addCategorySegue2", sender: nil)
   }
   
   @IBAction func levelSlider(_ sender: UISlider) {
@@ -90,7 +141,9 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
   }
   // セルを選択
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    didCategorySelect = (categoryString[row])!
+    if let didCategoryString = categoryString[row] {
+      didCategorySelect = didCategoryString
+    }
   }
   
   // データの上書き保存
@@ -116,7 +169,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
     alertController.addAction(alertAction)
     present(alertController, animated: true, completion: nil)
-    dismiss(animated: true, completion: nil)
+    _ = navigationController?.popViewController(animated: true)
   }
   
   // 入力項目を全てリセット

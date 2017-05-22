@@ -11,46 +11,53 @@ import RealmSwift
 
 class resultViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   
-//  var questionItem: Results<RealmDB>!
-  var selectId: [Int] = []
-  var correct: Float = 0.00
-  var wrong: Float = 0.00
-  var mark: [String] = []
-  var i: Int = 0
-  var l: Int = 1
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-      //AppDelegateのインスタンスを取得
-
-      let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-      selectId = appDelegate.selectId
-      correct = Float(appDelegate.correct)
-      wrong = Float(appDelegate.wrong)
-      mark = appDelegate.mark
-      
-      correctLabel.text = String("\((correct / (correct + wrong)) * 100)%")
-      correctproportionView.text = ("\(Int(correct+wrong))問中\(Int(correct))問正解しました")
-      
-      /* appDelegate 初期化 */
-      appDelegate.correct = 0
-      appDelegate.wrong = 0
-      appDelegate.mark = []
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+  var selectId: [Int] = []    // 選択された問題番号(Id)
+  var correct: Float = 0.00   // 正解数
+  var wrong: Float = 0.00     // 不正解数
+  var rate: Float = 0.0       // 正答率
+  var mark: [String] = []     // ○×マーク
+  var i: Int = 0              // 選択された問題を格納した配列の順番を指定
+  var l: Int = 1              // 問題番号
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    // Do any additional setup after loading the view.
+    //AppDelegateのインスタンスを取得
+    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    // 代入
+    selectId = appDelegate.selectId
+    correct = Float(appDelegate.correct)
+    wrong = Float(appDelegate.wrong)
+    mark = appDelegate.mark
     
+    // 正答率を算出
+    rate = ((correct / (correct + wrong)) * 100)
+    
+    // 小数第１位までを表示
+    let CGrate: CGFloat = CGFloat(rate)
+    let CGRate = String(format: "%.01f", Float(CGrate))
+    
+    correctLabel.text = String("\(CGRate)%")
+    correctproportionView.text = ("\(Int(correct+wrong))問中\(Int(correct))問正解しました")
+    
+    /* appDelegate 初期化 */
+    appDelegate.correct = 0
+    appDelegate.wrong = 0
+    appDelegate.mark = []
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
   @IBOutlet weak var correctLabelView: UILabel!
   @IBOutlet weak var correctLabel: UILabel!
   @IBOutlet weak var correctproportionView: UILabel!
   @IBOutlet weak var resultTableView: UITableView!
-
+  
   @IBAction func resultButton(_ sender: Any) {
+    _ = navigationController?.popToRootViewController(animated: true)
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -61,9 +68,11 @@ class resultViewController: UIViewController, UITableViewDelegate, UITableViewDa
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    // cellの表示方法をResultCellクラスで定義した表式にする
     let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath) as! ResultCell
+    
     let realm = try! Realm()
-    // 選択されたIDからRealmDBに保存してあるデータを表示
+    // 選択されたIdからRealmDBに保存してあるデータを表示
     let selectRealmDB = realm.object(ofType: RealmDB.self, forPrimaryKey: selectId[i] as AnyObject)
     if let selectTitle = selectRealmDB?.title {
       cell.setCell(number: "第\(String(describing: l))問", title: String(describing: selectTitle), mark: String(mark[indexPath.row]))

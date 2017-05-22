@@ -12,38 +12,70 @@ import RealmSwift
 class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
   
   var questionItem: Results<RealmDB>!
-//  var categoryItem: Results<CategoryList>!
-  
-  // Pickerに格納されている文字列
-  var categoryString: [String?] = ["国語","数学", "社会", "理科", "英語"]
-  // Pickerで選択した文字列の格納場所
-  var didCategorySelect = String()
-  // TableViewで選択したデータのIDの格納場所
-  var selectId = Int()
+  var categoryItem: Results<CategoryDB>!
+  var categoryString: [String?] = []  // Pickerに格納されている文字列
+  var didCategorySelect = String()    // Pickerで選択した文字列の格納場所
+  var count: Int = 0                  // CategoryDBに保存してあるデータ数
+  var i: Int = 0                      // 比較する変数
   
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     let realm = try! Realm()
+    let realms = try! Realm()
     questionItem = realm.objects(RealmDB.self)
-//    categoryItem = realm.objects(CategoryList.self)
+    categoryItem = realms.objects(CategoryDB.self)
     
-//    let editCategoryList = realm.objects(CategoryList.self).value(forKey: "categoryname")
-//    let categoryString = editCategoryList as? [String]
-//    categoryPickerView.selectRow(0, inComponent: 0, animated: false)
-//    if let categoryString = categoryString {
-//      didCategorySelect = categoryString[0]
-//    }
+    count = categoryItem.count
+    // CategoryDBに保存してある値を配列に格納
+    while count>i {
+      let object = categoryItem[i]
+      categoryString += [object.name]
+      i += 1
+    }
+    // 初期化
+    i = 0
+
+    if (categoryString.isEmpty == false) {
+      categoryPickerView.selectRow(0, inComponent: 0, animated: true)
+      didCategorySelect = categoryString[0]!
+    }
+    
+    // levelの初期値
     nowLevel.text = "5"
-    
-    
   }
+  
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    let realms = try! Realm()
+    categoryItem = realms.objects(CategoryDB.self)
+    // 変更後の数
+    let recount: Int = categoryItem.count
+    // 変更前の数と比べる
+    if(recount != count){
+      // 配列の中身を初期化
+      categoryString = []
+      // CategoryDBに保存してある値を配列にあるだけ再度格納
+      while recount>i {
+        let object = categoryItem[i]
+        categoryString += [object.name]
+        i += 1
+      }
+      // 比較する変数の初期化
+      i = 0
+      count = recount
+      categoryPickerView.selectRow(recount, inComponent: 0, animated: true)
+      categoryPickerView.reloadAllComponents()
+    }
+    
+  }
   
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var questionLabel: UILabel!
@@ -57,6 +89,11 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
   @IBOutlet weak var answerTextView: UITextField!
   @IBOutlet weak var categoryPickerView: UIPickerView!
   
+  @IBAction func addCategoryButton(_ sender: Any) {
+    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate //AppDelegateのインスタンスを取得
+    appDelegate.pop = "Second"
+    performSegue(withIdentifier: "addCategorySegue", sender: nil)
+  }
   
   @IBAction func tapScreen(_ sender: Any) {
     self.view.endEditing(true)
@@ -80,17 +117,11 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
   }
   // pickerViewのセルを選択
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    didCategorySelect = (categoryString[row])!
+    if let didCategoryString = categoryString[row] {
+      didCategorySelect = didCategoryString
+    }
   }
   
-//  func createRealmDB(name: String, category: [String]){
-//    let categoryList = List<CategoryList>()
-//    for categorys in category {
-//      let newCategory = CategoryList()
-//      newCategory.categorylist = categorys
-//      categoryList.append(newCategory)
-//    }
-//  }
   
   // データを保存
   @IBAction func saveButton(_ sender: Any) {

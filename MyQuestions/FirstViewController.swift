@@ -12,14 +12,14 @@ import RealmSwift
 class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   
   var questionItem: Results<RealmDB>!
-  var selectId :Int = 0
-  var correctmark: Float = 0.0
-  var wrongmark: Float = 0.0
-  var rate: Float = 0.0
+  var selectId : Int = 0    // 選択された問題番号
+
   
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    let realm = try! Realm()
+    questionItem = realm.objects(RealmDB.self).sorted(byKeyPath: "id", ascending: true)
   }
   
   override func didReceiveMemoryWarning() {
@@ -50,9 +50,25 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "questionCell")
     let object = questionItem[indexPath.row]
-    rate = ((Float(object.correctmark)) / ((Float(object.correctmark))+(Float(wrongmark))))
-    cell.textLabel?.text = object.title
-    cell.detailTextLabel?.text = ("正答率:\(rate)%")
+    var correctmark: Float = 0.0
+    var wrongmark: Float = 0.0
+    var rate: Float = 0.0
+    
+    correctmark = Float(object.correctmark)
+    wrongmark = Float(object.wrongmark)
+    
+    // nan表示にさせないための処理
+    if (object.correctmark == 0){
+      rate = 0.0
+    }else{
+      // 正答率を算出
+      rate = ((correctmark / (correctmark + wrongmark)) * 100)
+    }
+    // 小数第１位までを表示
+    let CGrate: CGFloat = CGFloat(rate)
+    let CGRate = String(format: "%.01f", Float(CGrate))
+    cell.textLabel?.text = object.category
+    cell.detailTextLabel?.text = ("正答率:\(CGRate)%")
     return cell
   }
   
