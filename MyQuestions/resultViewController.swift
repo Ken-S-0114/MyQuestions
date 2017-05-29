@@ -44,7 +44,11 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
     /* appDelegate 初期化 */
     appDelegate.correct = 0
     appDelegate.wrong = 0
+    appDelegate.selectCount = 1
     appDelegate.mark = []
+    
+    // 戻るボタン非表示
+    self.navigationItem.hidesBackButton = true
   }
   
   override func didReceiveMemoryWarning() {

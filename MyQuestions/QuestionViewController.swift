@@ -8,13 +8,14 @@
 
 import UIKit
 import RealmSwift
+import AVFoundation
 
-class QuestionViewController: UIViewController {
+class QuestionViewController: UIViewController, UITextFieldDelegate {
   
   var questionItem: Results<RealmDB>!
   var selectId: [Int] = []    // 選択された問題(Id)
   var selectAnswer: String?   // 問題の答え
-  var answerCount: Int = 0    // 回答回数
+  var answerCount: Int = 1    // 回答回数
   var limitCount: Int = 1     // 回答回数上限
   var correct: Int = 0        // appDelegate用正解数
   var wrong: Int = 0          // appDelegate用不正解数
@@ -25,6 +26,16 @@ class QuestionViewController: UIViewController {
   var selectCount: Int = 1    // 問題番号表示用
   var rateCheck = Bool()
   
+  // 再生する audio ファイルのパスを取得
+  // 正解時
+  let correctPath = Bundle.main.bundleURL.appendingPathComponent("Quiz-Correct_Answer01-1.mp3")
+  var correctPlayer = AVAudioPlayer()
+  // 不正解時（まだチャンスあり）
+  let wrong2Path = Bundle.main.bundleURL.appendingPathComponent("Quiz-Wrong_Buzzer02-2.mp3")
+  var wrong2Player = AVAudioPlayer()
+  // 不正解時
+  let wrongPath = Bundle.main.bundleURL.appendingPathComponent("Quiz-Wrong_Buzzer02-3.mp3")
+  var wrongPlayer = AVAudioPlayer()
   //AppDelegateのインスタンスを取得
   let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
   
@@ -33,7 +44,6 @@ class QuestionViewController: UIViewController {
     // Do any additional setup after loading the view.
     selectId = appDelegate.selectId
     limitCount = appDelegate.limit
-    
     let realm = try! Realm()
     // 選択されたIDからRealmDBに保存してあるデータを表示
     let selectRealmDB = realm.object(ofType: RealmDB.self, forPrimaryKey: selectId[i] as AnyObject)
@@ -48,12 +58,15 @@ class QuestionViewController: UIViewController {
     answerTextField.text = ""
     // Realmに格納してある特定の答え
     selectAnswer = (selectRealmDB?.answer)!
-    
+    // 決定ボタン表示
     checkButtonView.isEnabled = true
+    // 次の問題ボタン非表示
     nextQuestionButtonView.isEnabled = false
-    
+    // 現在の問題数表示
     selectCount = appDelegate.selectCount
-    self.navigationItem.title = String("第\(selectCount)問")
+    self.navigationItem.title = String("第\(selectCount)/\(selectId.count)問")
+    // 戻るボタン非表示
+    self.navigationItem.hidesBackButton = true
     
   }
   
@@ -82,13 +95,20 @@ class QuestionViewController: UIViewController {
   @IBOutlet weak var nextQuestionButtonView: UIBarButtonItem!
   @IBOutlet weak var checkButtonView: UIButton!
   
+
+  @IBAction func breakButton(_ sender: Any) {
+    _ = navigationController?.popToRootViewController(animated: true)
+  }
   @IBAction func nextQuestionButton(_ sender: Any) {
     if (i < selectId.count) {
+      answerCount = 1    // 回答回数
+//      correctPlayer.stop()
+//      wrong2Player.stop()
+//      wrongPlayer.stop()
       // 画面の再表示
       viewDidLoad()
     }else {
-      //AppDelegateのインスタンスを取得
-      let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+      selectCount = 1
       appDelegate.correct = correct
       appDelegate.wrong = wrong
       appDelegate.mark = mark
@@ -99,19 +119,14 @@ class QuestionViewController: UIViewController {
   
   // 答え合わせ
   @IBAction func checkButton(_ sender: Any) {
-    let resultRealmDB = RealmDB()
-    resultRealmDB.category = (categoryLabel.text)!
-    resultRealmDB.title = (titleLabel.text)!
-    resultRealmDB.question = (questionLabel.text)!
-    resultRealmDB.answer = selectAnswer!
-    resultRealmDB.level = (levelLabel.text)!
-    
     rateCheck = appDelegate.rateCheck
     
     // 答えが入力されているか確認
     if (answerTextField.text != "") {
       // 正解の場合
       if (answerTextField.text == selectAnswer!) {
+        // 正解BGM
+        soundPlayer(&correctPlayer, path: correctPath, count: 0)
         let alertController = UIAlertController(title: "正解", message: nil, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(alertAction)
@@ -120,11 +135,29 @@ class QuestionViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
         
         if (rateCheck == true){
-        // resultRealmDBに結果を蓄積
-        resultRealmDB.id = selectId[i]
-        resultRealmDB.correctMark = correctMark + 1
-        resultRealmDB.wrongMark = wrongMark
+          // resultRealmDBに結果を蓄積
+          let resultRealmDB = RealmDB()
+          resultRealmDB.id = selectId[i]
+          resultRealmDB.category = (categoryLabel.text)!
+          resultRealmDB.title = (titleLabel.text)!
+          resultRealmDB.question = (questionLabel.text)!
+          resultRealmDB.answer = selectAnswer!
+          resultRealmDB.level = (levelLabel.text)!
+          
+          resultRealmDB.correctMark = correctMark + 1
+          resultRealmDB.wrongMark = wrongMark
+          
+          // 上記で代入したテキストデータを永続化
+          let realm = try! Realm()
+          try! realm.write({ () -> Void in
+            realm.add(resultRealmDB, update: true)
+          })
+          
         }
+        // 次の問題準備
+        selectCount += 1
+        i += 1
+        appDelegate.selectCount = selectCount
         
         // ボタンの表示を操作
         checkButtonView.isEnabled = false
@@ -134,12 +167,17 @@ class QuestionViewController: UIViewController {
       else if (answerTextField.text != selectAnswer!) {
         // 設定した回数以内か確認
         if (answerCount < limitCount) {
-          let alertController = UIAlertController(title: "不正解", message: "残りあと\((limitCount-1)-answerCount)回", preferredStyle: .alert)
+          // 不正解BGM
+          soundPlayer(&wrong2Player, path: wrong2Path, count: 0)
+          let alertController = UIAlertController(title: "不正解", message: "残りあと\((limitCount)-answerCount)回", preferredStyle: .alert)
           let alertAction = UIAlertAction(title: "もう一度", style: .default, handler: nil)
           alertController.addAction(alertAction)
           present(alertController, animated: true, completion: nil)
           answerCount += 1
+          
         }else {
+          // 不正解BGM
+          soundPlayer(&wrongPlayer, path: wrongPath, count: 0)
           let alertController = UIAlertController(title: "不正解\n答え：\(selectAnswer!)", message: nil, preferredStyle: .alert)
           let alertAction = UIAlertAction(title: "確認", style: .default, handler: nil)
           alertController.addAction(alertAction)
@@ -148,11 +186,32 @@ class QuestionViewController: UIViewController {
           present(alertController, animated: true, completion: nil)
           
           if (rateCheck == true){
-          // resultRealmDBに結果を蓄積
-          resultRealmDB.id = selectId[i]
-          resultRealmDB.wrongMark = wrongMark + 1
-          resultRealmDB.correctMark = correctMark
+            // resultRealmDBに結果を蓄積
+            print(selectId[i])
+            let resultRealmDB = RealmDB()
+            resultRealmDB.id = selectId[i]
+            
+            resultRealmDB.category = (categoryLabel.text)!
+            resultRealmDB.title = (titleLabel.text)!
+            resultRealmDB.question = (questionLabel.text)!
+            resultRealmDB.answer = selectAnswer!
+            resultRealmDB.level = (levelLabel.text)!
+            
+            resultRealmDB.wrongMark = wrongMark + 1
+            resultRealmDB.correctMark = correctMark
+            
+            // 上記で代入したテキストデータを永続化
+            let realm = try! Realm()
+            try! realm.write({ () -> Void in
+              realm.add(resultRealmDB, update: true)
+            })
+            
           }
+          // 次の問題準備
+          selectCount += 1
+          i += 1
+          print(i)
+          appDelegate.selectCount = selectCount
           
           // ボタンの表示を操作
           checkButtonView.isEnabled = false
@@ -166,18 +225,23 @@ class QuestionViewController: UIViewController {
         alertController.addAction(alertAction)
         present(alertController, animated: true, completion: nil)
       }
-      // 上記で代入したテキストデータを永続化
-      let realm = try! Realm()
-      try! realm.write({ () -> Void in
-        realm.add(resultRealmDB, update: true)
-      })
-      
     }
-    // 次の問題準備
-    selectCount += 1
-    i += 1
-    appDelegate.selectCount = selectCount
   }
   
+  // Doneボタンを押した際キーボードを閉じる
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
+  }
   
+  fileprivate func soundPlayer(_ player:inout AVAudioPlayer, path: URL, count: Int) {
+    do {
+      player = try AVAudioPlayer(contentsOf: path, fileTypeHint: nil)
+      player.numberOfLoops = count
+      player.play()
+    } catch {
+      print("エラーが発生しました！")
+    }
+  }
+
 }

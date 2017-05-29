@@ -12,6 +12,7 @@ import RealmSwift
 class StartViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
   
   var selectId: [Int] = []    // SelectQuestionViewControllerで選択された問題番号
+  var limit = Int()
   // AppDelegateのインスタンスを取得
   let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
   
@@ -25,20 +26,28 @@ class StartViewController: UIViewController, UINavigationControllerDelegate, UII
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+    limitLabel.text = "正答回数：\(limit)回"
   }
   
   override func viewWillAppear(_ animated: Bool) {
     selectId = appDelegate.selectId
-    selectIdLabel.text! = "問題数：\(selectId.count)問"
+    limit = appDelegate.limit
+    selectIdLabel.text = "問題数：\(selectId.count)問"
+    limitLabel.text = "正答回数：\(limit)回"
+    
     // 問題が選択している場合
     if (selectId.isEmpty == false) {
       // ボタン操作を有効
       startButtonView.isEnabled = true
+    }else {
+      // ボタン操作を無効
+      startButtonView.isEnabled = false
     }
   }
   
   @IBOutlet weak var backgroundImageView: UIImageView!
   @IBOutlet weak var selectIdLabel: UILabel!
+  @IBOutlet weak var limitLabel: UILabel!
   @IBOutlet weak var startButtonView: UIButton!
   @IBAction func selectBackground(_ sender: Any) {
     pickImageFromLibrary()  //ライブラリから写真を選択する

@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   var selectTableId: Int = 0
   var selectId: [Int] = []
-  var limit = Int()
+  var limit: Int = 1
   var correct: Int = 0
   var wrong: Int = 0
   var mark: [String] = []

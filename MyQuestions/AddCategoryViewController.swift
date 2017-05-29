@@ -35,7 +35,7 @@ class AddCategoryViewController: UIViewController {
   @IBOutlet weak var newCategoryTextField: UITextField!
   @IBOutlet weak var doneButtonView: UIBarButtonItem!
   
-  @IBAction func doneButton(_ sender: Any) {
+  @IBAction func doneButton(_ sender: UIBarButtonItem) {
     var i: Int = 0;
     // 新しいインスタンスを生成
     let newAddCategory = CategoryDB()

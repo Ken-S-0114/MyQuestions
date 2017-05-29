@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
   
   var questionItem: Results<RealmDB>!
   var selectId: [Int] = []  // 選択された問題番号
@@ -21,24 +21,63 @@ class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITab
     
     let realm = try! Realm()
     questionItem = realm.objects(RealmDB.self).sorted(byKeyPath: "id", ascending: true)
-    
+    // 入力されていなくてもDoneキーが押せる
+    searchTextBar.enablesReturnKeyAutomatically = false
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     selectId = appDelegate.selectId
-//    print(selectId.count)
-//    print(selectId)
-//    print(questionItem)
     questionTableView.reloadData()
   }
   
-  
+  @IBOutlet weak var searchTextBar: UISearchBar!
   @IBOutlet weak var questionTableView: UITableView!
   
   @IBAction func decisionButton(_ sender: UIBarButtonItem) {
     appDelegate.selectId = selectId //appDelegateの変数を操作
     _ = navigationController?.popViewController(animated: true)
+  }
+  
+  func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    let searchText: String
+    if text.isEmpty {
+      // 文字が削除されたとき
+      // 末尾の1文字を削除した文字を検索ワードとします
+      // 制限事項：カーソルを移動して末尾でない文字を削除した場合でも末尾を削除した文字で検索を行います
+      let searchBarText = searchBar.text!
+      let index = searchBarText.endIndex
+      searchText = searchBarText.substring(to: index)
+      //let index = searchBarText.endIndex.advanced(by: -1)
+      //searchText = searchBarText.substringToIndex(index)
+    } else {
+      // 文字入力されたとき
+      // 制限事項：文字変換したときに変換前の文字と変換後の文字を結合した文字で検索してしまう
+      // 例："あい"を"愛"に変換したときsearchTextは"あい愛"になります
+      // 変換後にfunc searchBar(..., textDidChange ...)が呼ばれるため、このタイミングでsearchを行ってしまうが、すぐに後追いでtextDidChangeのsearchを実行することで回避
+      let searchBarText = NSMutableString(string: searchBar.text!)
+      searchBarText.insert(text, at: range.location)
+      searchText = searchBarText as String
+    }
+    search(text: searchText)
+    return true
+  }
+  
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    search(text: searchBar.text!)
+  }
+  
+  func search(text: String){
+    questionItem = try! Realm().objects(RealmDB.self).filter("title CONTAINS %@ OR answer CONTAINS %@ OR category CONTAINS %@", text, text, text)
+    questionTableView.reloadData()
+  }
+  
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    if (searchBar.text == ""){
+      questionItem = try! Realm().objects(RealmDB.self).sorted(byKeyPath: "id", ascending: true)
+      questionTableView.reloadData()
+    }
+    searchTextBar.endEditing(true)
   }
   
   // セルが選択された時に呼び出される
@@ -106,7 +145,7 @@ class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITab
     // 小数第１位までを表示
     let CGrate: CGFloat = CGFloat(rate)
     let CGRate = String(format: "%.01f", Float(CGrate))
-
+    
     cell.setCell(category: String(object.category), rate: "正答率:\(CGRate)%", title: String(object.title))
     
     // セルが選択された時の背景色を消す

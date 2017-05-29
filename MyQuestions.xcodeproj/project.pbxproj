@@ -10,6 +10,10 @@
 		422CF45B74C731F2D85B72CF /* Pods_MyQuestions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B18D8FA0FFF723EE731FC98 /* Pods_MyQuestions.framework */; };
 		B22E320E1EDBE8BA00ACC480 /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22E320D1EDBE8BA00ACC480 /* QuestionCell.swift */; };
 		B22E32101EDBF15F00ACC480 /* SelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22E320F1EDBF15F00ACC480 /* SelectCell.swift */; };
+		B22E32121EDC5BE200ACC480 /* Quiz-Correct_Answer01-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B22E32111EDC5BE200ACC480 /* Quiz-Correct_Answer01-1.mp3 */; };
+		B22E32141EDC5EDF00ACC480 /* Quiz-Wrong_Buzzer02-3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B22E32131EDC5EDF00ACC480 /* Quiz-Wrong_Buzzer02-3.mp3 */; };
+		B22E32161EDC5FA800ACC480 /* Quiz-Wrong_Buzzer02-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B22E32151EDC5FA800ACC480 /* Quiz-Wrong_Buzzer02-2.mp3 */; };
+		B22E32181EDC675500ACC480 /* Geotica_2012.otf in Resources */ = {isa = PBXBuildFile; fileRef = B22E32171EDC675500ACC480 /* Geotica_2012.otf */; };
 		B25843261EC0FCD900E5C0F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25843251EC0FCD900E5C0F9 /* AppDelegate.swift */; };
 		B25843281EC0FCD900E5C0F9 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25843271EC0FCD900E5C0F9 /* FirstViewController.swift */; };
 		B258432A1EC0FCD900E5C0F9 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25843291EC0FCD900E5C0F9 /* SecondViewController.swift */; };
@@ -25,7 +29,6 @@
 		B26183E71ED077F5006CB46A /* ResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26183E61ED077F5006CB46A /* ResultCell.swift */; };
 		B26183E91ED189DE006CB46A /* CategoryDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26183E81ED189DE006CB46A /* CategoryDB.swift */; };
 		B2C56D6A1ECC773300B9A303 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C56D691ECC773300B9A303 /* ResultViewController.swift */; };
-		B2C56D6C1ECC8F2400B9A303 /* AddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C56D6B1ECC8F2400B9A303 /* AddCategoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,10 @@
 		A38E6CCA66CE4AE4B2538A14 /* Pods-MyQuestions.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyQuestions.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyQuestions/Pods-MyQuestions.release.xcconfig"; sourceTree = "<group>"; };
 		B22E320D1EDBE8BA00ACC480 /* QuestionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
 		B22E320F1EDBF15F00ACC480 /* SelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCell.swift; sourceTree = "<group>"; };
+		B22E32111EDC5BE200ACC480 /* Quiz-Correct_Answer01-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Quiz-Correct_Answer01-1.mp3"; path = "../../../Downloads/Quiz-Correct_Answer01-mp3/Quiz-Correct_Answer01-1.mp3"; sourceTree = "<group>"; };
+		B22E32131EDC5EDF00ACC480 /* Quiz-Wrong_Buzzer02-3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Quiz-Wrong_Buzzer02-3.mp3"; path = "../../../Downloads/Quiz-Wrong_Buzzer02-mp3/Quiz-Wrong_Buzzer02-3.mp3"; sourceTree = "<group>"; };
+		B22E32151EDC5FA800ACC480 /* Quiz-Wrong_Buzzer02-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Quiz-Wrong_Buzzer02-2.mp3"; path = "../../../Downloads/Quiz-Wrong_Buzzer02-mp3/Quiz-Wrong_Buzzer02-2.mp3"; sourceTree = "<group>"; };
+		B22E32171EDC675500ACC480 /* Geotica_2012.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Geotica_2012.otf; path = "../../../Downloads/geotica2012<c+23rq9q>/Geotica_2012.otf"; sourceTree = "<group>"; };
 		B25843221EC0FCD900E5C0F9 /* MyQuestions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyQuestions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B25843251EC0FCD900E5C0F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B25843271EC0FCD900E5C0F9 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -50,7 +57,6 @@
 		B26183E61ED077F5006CB46A /* ResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultCell.swift; sourceTree = "<group>"; };
 		B26183E81ED189DE006CB46A /* CategoryDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryDB.swift; sourceTree = "<group>"; };
 		B2C56D691ECC773300B9A303 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
-		B2C56D6B1ECC8F2400B9A303 /* AddCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCategoryViewController.swift; sourceTree = "<group>"; };
 		E0F74971E4AE348C54C106BA /* Pods-MyQuestions.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyQuestions.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyQuestions/Pods-MyQuestions.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,14 +110,17 @@
 				B25843451EC7448B00E5C0F9 /* SelectQuestionViewController.swift */,
 				B2C56D691ECC773300B9A303 /* ResultViewController.swift */,
 				B26183E61ED077F5006CB46A /* ResultCell.swift */,
-				B2C56D6B1ECC8F2400B9A303 /* AddCategoryViewController.swift */,
 				B22E320D1EDBE8BA00ACC480 /* QuestionCell.swift */,
 				B25843431EC73C7300E5C0F9 /* ConfigurationViewController.swift */,
 				B25843391EC1994C00E5C0F9 /* RealmDB.swift */,
 				B22E320F1EDBF15F00ACC480 /* SelectCell.swift */,
 				B26183E81ED189DE006CB46A /* CategoryDB.swift */,
+				B22E32171EDC675500ACC480 /* Geotica_2012.otf */,
 				B258432B1EC0FCD900E5C0F9 /* Main.storyboard */,
 				B25843301EC0FCD900E5C0F9 /* LaunchScreen.storyboard */,
+				B22E32111EDC5BE200ACC480 /* Quiz-Correct_Answer01-1.mp3 */,
+				B22E32151EDC5FA800ACC480 /* Quiz-Wrong_Buzzer02-2.mp3 */,
+				B22E32131EDC5EDF00ACC480 /* Quiz-Wrong_Buzzer02-3.mp3 */,
 				B258432E1EC0FCD900E5C0F9 /* Assets.xcassets */,
 				B25843331EC0FCD900E5C0F9 /* Info.plist */,
 			);
@@ -190,9 +199,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B22E32141EDC5EDF00ACC480 /* Quiz-Wrong_Buzzer02-3.mp3 in Resources */,
 				B25843321EC0FCD900E5C0F9 /* LaunchScreen.storyboard in Resources */,
+				B22E32181EDC675500ACC480 /* Geotica_2012.otf in Resources */,
 				B258432F1EC0FCD900E5C0F9 /* Assets.xcassets in Resources */,
 				B258432D1EC0FCD900E5C0F9 /* Main.storyboard in Resources */,
+				B22E32161EDC5FA800ACC480 /* Quiz-Wrong_Buzzer02-2.mp3 in Resources */,
+				B22E32121EDC5BE200ACC480 /* Quiz-Correct_Answer01-1.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,7 +278,6 @@
 				B22E32101EDBF15F00ACC480 /* SelectCell.swift in Sources */,
 				B26183E91ED189DE006CB46A /* CategoryDB.swift in Sources */,
 				B258433A1EC1994C00E5C0F9 /* RealmDB.swift in Sources */,
-				B2C56D6C1ECC8F2400B9A303 /* AddCategoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

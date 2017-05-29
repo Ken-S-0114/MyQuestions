@@ -17,26 +17,28 @@ class ConfigurationViewController: UIViewController, UIPickerViewDelegate, UIPic
   let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
   
   override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    super.viewDidLoad()
+    // Do any additional setup after loading the view.
+    limit = limitCounter[0]
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
+    limit = appDelegate.limit
     rateCheck = appDelegate.rateCheck
     if (rateCheck == true){
       rateSwitchView.isOn = true
     }else{
       rateSwitchView.isOn = false
     }
+    limitPickerView.selectRow((limit)-1, inComponent: 0, animated: true)
   }
-    
+  
   @IBOutlet weak var limitPickerView: UIPickerView!
   @IBOutlet weak var rateLabelView: UILabel!
   @IBOutlet weak var rateSwitchView: UISwitch!
@@ -49,12 +51,12 @@ class ConfigurationViewController: UIViewController, UIPickerViewDelegate, UIPic
     }
     appDelegate.rateCheck = rateCheck
   }
-
+  
   @IBAction func decisionButton(_ sender: Any) {
     appDelegate.limit = limit//appDelegateの変数を操作
     _ = navigationController?.popViewController(animated: true)
   }
-
+  
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
   }
@@ -70,28 +72,4 @@ class ConfigurationViewController: UIViewController, UIPickerViewDelegate, UIPic
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     limit = limitCounter[row]
   }
-
-//  func pickImageFromLibrary() {
-//    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
-//      //写真ライブラリ(カメラロール)表示用のViewControllerを宣言
-//      let controller = UIImagePickerController()
-//      controller.delegate = self
-//      //新しく宣言したViewControllerでカメラとカメラロールのどちらを表示するかを指定
-//      //以下はカメラロールの例
-//      //.Cameraを指定した場合はカメラを呼び出し(シミュレーター不可)
-//      controller.sourceType = UIImagePickerControllerSourceType.photoLibrary
-//      self.present(controller, animated: true, completion: nil)
-//    }
-//  }
-//  
-//  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-//    if info[UIImagePickerControllerOriginalImage] != nil {
-//      //didFinishPickingMediaWithInfo通して渡された情報(選択された画像情報)をUIImageにCastする
-//      let startVC: StartViewController = UIApplication.shared.delegate as! StartViewController //AppDelegateのインスタンスを取得
-//      StartViewController.backgroundImageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
-//    }
-//    //写真選択後にカメラロール表示ViewControllerを閉じる
-//    picker.dismiss(animated: true, completion: nil)
-//  }
-//
 }

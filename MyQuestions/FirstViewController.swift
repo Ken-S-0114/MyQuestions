@@ -22,7 +22,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // Do any additional setup after loading the view, typically from a nib.
     let realm = try! Realm()
     questionItem = realm.objects(RealmDB.self).sorted(byKeyPath: "id", ascending: true)
-    // 入力されていなくてもReturnキーが押せる
+    // 入力されていなくてもDoneキーが押せる
     searchTextBar.enablesReturnKeyAutomatically = false
   }
   
@@ -41,8 +41,6 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
   @IBOutlet weak var searchTextBar: UISearchBar!
   @IBOutlet weak var questionTableView: UITableView!
 
-
-  
   func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
     let searchText: String
     if text.isEmpty {
@@ -72,15 +70,15 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
   }
   
   func search(text: String){
-   if (text != ""){
-      questionItem = try! Realm().objects(RealmDB.self).filter("title == %@ OR answer == %@ OR category == %@", text, text, text)
-    } else if (text == ""){
-      questionItem = try! Realm().objects(RealmDB.self).sorted(byKeyPath: "id", ascending: true)
-    }
+    questionItem = try! Realm().objects(RealmDB.self).filter("title CONTAINS %@ OR answer CONTAINS %@ OR category CONTAINS %@", text, text, text)
     questionTableView.reloadData()
   }
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    if (searchBar.text == ""){
+      questionItem = try! Realm().objects(RealmDB.self).sorted(byKeyPath: "id", ascending: true)
+      questionTableView.reloadData()
+    }
     searchTextBar.endEditing(true)
   }
   

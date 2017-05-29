@@ -13,9 +13,10 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
   
   var questionItem: Results<RealmDB>!
   var categoryItem: Results<CategoryDB>!
-  var count: Int = 0      // CategoryDBに保存してあるデータ数
-  var l: Int = 0          // UIPickerの初期位置を格納
-  var i: Int = 0          // 比較する変数
+  var count: Int = 0              // CategoryDBに保存してあるデータ数
+  var l: Int = 0                  // UIPickerの初期位置を格納
+  var i: Int = 0                  // 比較する変数
+  var check: Bool = true          // 同じジャンル名があるかチェックする変数
   //AppDelegateのインスタンスを取得
   let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
   // Pickerに格納されている文字列
@@ -117,9 +118,76 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
   @IBOutlet weak var categoryPickerView: UIPickerView!
   
   @IBAction func addCategory(_ sender: Any) {
-    appDelegate.pop = ""
-    appDelegate.pop = "Edit"
-    performSegue(withIdentifier: "addCategorySegue2", sender: nil)
+    let alert = UIAlertController(title: "新規カテゴリー", message: nil, preferredStyle: .alert)
+    let saveAction = UIAlertAction(title: "OK", style: .default, handler: {
+      (action:UIAlertAction!) -> Void in
+      let realms = try! Realm()
+      self.categoryItem = realms.objects(CategoryDB.self)
+      
+      var i: Int = 0;
+      // 新しいインスタンスを生成
+      let newAddCategory = CategoryDB()
+      //textField等に入力したデータをnewAddCategoryに代入
+      newAddCategory.name = alert.textFields![0].text!
+      //既にデータが他に作成してある場合
+      if self.categoryItem.count != 0 {
+        newAddCategory.id = self.categoryItem.max(ofProperty: "id")! + 1
+      }
+      
+      //上記で代入したテキストデータを永続化
+      
+      while_i: while self.categoryItem.count > i {
+        // 同じジャンル名があるかDB上でチェック
+        if (newAddCategory.name == self.categoryItem[i].name){
+          // アクションシートの親となる UIView を設定
+          alert.popoverPresentationController?.sourceView = self.view
+          // 吹き出しの出現箇所を CGRect で設定 （これはナビゲーションバーから吹き出しを出す例）
+          alert.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
+          // 同じ名前のジャンルが既に存在している場合
+          let alertController = UIAlertController(title: "保存失敗", message: "同じ名前のジャンルが既に存在します", preferredStyle: .actionSheet)
+          let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+          alertController.addAction(alertAction)
+          self.present(alertController, animated: true, completion: nil)
+          self.check = false
+          break while_i
+        }
+        i += 1
+        self.check = true
+      }
+      
+      if((newAddCategory.name.isEmpty == false) && (self.check == true)){
+        // アクションシートの親となる UIView を設定
+        alert.popoverPresentationController?.sourceView = self.view
+        
+        // 吹き出しの出現箇所を CGRect で設定 （これはナビゲーションバーから吹き出しを出す例）
+        alert.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
+        let alertController = UIAlertController(title: "保存しました", message: nil, preferredStyle: .actionSheet)
+        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true, completion: nil)
+        
+        //上記で代入したテキストデータを永続化
+        try! realms.write({ () -> Void in
+          realms.add(newAddCategory, update: false)
+        })
+        self.viewWillAppear(true)
+      }
+    })
+    alert.addAction(saveAction)
+
+    
+    // キャンセルボタンの設定
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+    alert.addAction(cancelAction)
+    
+    // UIAlertControllerにtextFieldを追加
+    alert.addTextField(configurationHandler: {(textField: UITextField!) -> Void in
+      textField.placeholder = "カテゴリーを入力してください"
+    })
+    
+    present(alert, animated: true, completion: nil)
+
+    viewWillAppear(true)
   }
   
   @IBAction func levelSlider(_ sender: UISlider) {
@@ -169,19 +237,19 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
       })
       
       // 上書き保存したことを知らせるアラート表示
-      let alertController = UIAlertController(title: "保存しました", message: "上書き保存します", preferredStyle: .alert)
+      let alertController = UIAlertController(title: "保存しました", message: "上書き保存しました", preferredStyle: .alert)
       let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
       alertController.addAction(alertAction)
       present(alertController, animated: true, completion: nil)
-      _ = navigationController?.popViewController(animated: true)
-    }
-    else {
+      
+    }else {
       // 未入力を知らせるアラート表示
       let alertController = UIAlertController(title: "未入力項目が存在します", message: nil, preferredStyle: .alert)
       let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
       alertController.addAction(alertAction)
       present(alertController, animated: true, completion: nil)
     }
+    
   }
   
   
