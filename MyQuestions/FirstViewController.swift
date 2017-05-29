@@ -41,9 +41,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
   @IBOutlet weak var searchTextBar: UISearchBar!
   @IBOutlet weak var questionTableView: UITableView!
 
-  @IBAction func tapScreen(_ sender: Any) {
-    searchTextBar.endEditing(true)
-  }
+
   
   func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
     let searchText: String
@@ -74,10 +72,10 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
   }
   
   func search(text: String){
-    if (text == ""){
+   if (text != ""){
+      questionItem = try! Realm().objects(RealmDB.self).filter("title == %@ OR answer == %@ OR category == %@", text, text, text)
+    } else if (text == ""){
       questionItem = try! Realm().objects(RealmDB.self).sorted(byKeyPath: "id", ascending: true)
-    }else if (text != ""){
-      questionItem = try! Realm().objects(RealmDB.self).filter("title == %@ OR question == %@ OR answer == %@ OR category == %@ OR level == %@", text, text, text, text, text)
     }
     questionTableView.reloadData()
   }
@@ -98,7 +96,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "questionCell")
+    let cell = tableView.dequeueReusableCell(withIdentifier: "questionCell", for: indexPath) as! QuestionCell
     let object = questionItem[indexPath.row]
     var correctMark: Float = 0.0
     var wrongMark: Float = 0.0
@@ -117,8 +115,9 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // 小数第１位までを表示
     let CGrate: CGFloat = CGFloat(rate)
     let CGRate = String(format: "%.01f", Float(CGrate))
-    cell.textLabel?.text = object.category
-    cell.detailTextLabel?.text = ("正答率:\(CGRate)%")
+    
+    cell.setCell(category: String(object.category), rate: "正答率:\(CGRate)%", title: String(object.title))
+
     return cell
   }
   

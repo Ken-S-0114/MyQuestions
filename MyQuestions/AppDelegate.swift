@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var mark: [String] = []
   var pop = String()
   var selectCount: Int = 1
+  var rateCheck: Bool = true
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
    

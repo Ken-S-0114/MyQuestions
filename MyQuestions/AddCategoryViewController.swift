@@ -21,12 +21,19 @@ class AddCategoryViewController: UIViewController {
     // Do any additional setup after loading the view.
     let realms = try! Realm()
     categoryItem = realms.objects(CategoryDB.self)
+    // doneButtonView.isEnabled = true
   }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
+  
+  @IBAction func tapScreen(_ sender: Any) {
+    self.view.endEditing(true)
+  }
+  @IBOutlet weak var newCategoryTextField: UITextField!
+  @IBOutlet weak var doneButtonView: UIBarButtonItem!
   
   @IBAction func doneButton(_ sender: Any) {
     var i: Int = 0;
@@ -71,17 +78,16 @@ class AddCategoryViewController: UIViewController {
       //_ = self.navigationController?.popViewController(animated: true)
       let pop: String = appDelegate.pop
       print(pop)
-//      switch pop {
-//        case "Second":
-//          let sc = self.destinationViewController as! SecondViewController
-//          self.present(sc, animated: true, completion: nil)
-//        print("Secondに移動")
-//        case "Edit":
-//        _ = navigationController?.popToViewController(EditViewController(), animated: true)
-//        print("Editに移動")
-//      default:
-//        print("エラー")
-//      }
+      switch pop {
+        case "Second":
+          _ = navigationController?.popToViewController(SecondViewController(), animated: true)
+        print("Secondに移動")
+        case "Edit":
+        _ = navigationController?.popToViewController(EditViewController(), animated: true)
+        print("Editに移動")
+      default:
+        print("エラー")
+      }
     }
       // 答えが未入力の場合
     else {
@@ -92,7 +98,4 @@ class AddCategoryViewController: UIViewController {
     }
     
   }
-
-  @IBOutlet weak var newCategoryTextField: UITextField!
-  @IBAction func addBack(_ segue:UIStoryboardSegue){}
 }

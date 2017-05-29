@@ -23,6 +23,7 @@ class QuestionViewController: UIViewController {
   var wrongMark: Int = 0      // RealmDB用不正解数
   var i: Int = 0              // 配列から指定の問題を取り出す変数
   var selectCount: Int = 1    // 問題番号表示用
+  var rateCheck = Bool()
   
   //AppDelegateのインスタンスを取得
   let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -105,6 +106,8 @@ class QuestionViewController: UIViewController {
     resultRealmDB.answer = selectAnswer!
     resultRealmDB.level = (levelLabel.text)!
     
+    rateCheck = appDelegate.rateCheck
+    
     // 答えが入力されているか確認
     if (answerTextField.text != "") {
       // 正解の場合
@@ -116,10 +119,12 @@ class QuestionViewController: UIViewController {
         mark += ["○"];
         present(alertController, animated: true, completion: nil)
         
+        if (rateCheck == true){
         // resultRealmDBに結果を蓄積
         resultRealmDB.id = selectId[i]
         resultRealmDB.correctMark = correctMark + 1
         resultRealmDB.wrongMark = wrongMark
+        }
         
         // ボタンの表示を操作
         checkButtonView.isEnabled = false
@@ -142,10 +147,12 @@ class QuestionViewController: UIViewController {
           mark += ["×"];
           present(alertController, animated: true, completion: nil)
           
+          if (rateCheck == true){
           // resultRealmDBに結果を蓄積
           resultRealmDB.id = selectId[i]
           resultRealmDB.wrongMark = wrongMark + 1
           resultRealmDB.correctMark = correctMark
+          }
           
           // ボタンの表示を操作
           checkButtonView.isEnabled = false
@@ -170,7 +177,6 @@ class QuestionViewController: UIViewController {
     selectCount += 1
     i += 1
     appDelegate.selectCount = selectCount
-    print(selectCount)
   }
   
   

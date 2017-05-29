@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		422CF45B74C731F2D85B72CF /* Pods_MyQuestions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B18D8FA0FFF723EE731FC98 /* Pods_MyQuestions.framework */; };
+		B22E320E1EDBE8BA00ACC480 /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22E320D1EDBE8BA00ACC480 /* QuestionCell.swift */; };
+		B22E32101EDBF15F00ACC480 /* SelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22E320F1EDBF15F00ACC480 /* SelectCell.swift */; };
 		B25843261EC0FCD900E5C0F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25843251EC0FCD900E5C0F9 /* AppDelegate.swift */; };
 		B25843281EC0FCD900E5C0F9 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25843271EC0FCD900E5C0F9 /* FirstViewController.swift */; };
 		B258432A1EC0FCD900E5C0F9 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25843291EC0FCD900E5C0F9 /* SecondViewController.swift */; };
@@ -29,6 +31,8 @@
 /* Begin PBXFileReference section */
 		8B18D8FA0FFF723EE731FC98 /* Pods_MyQuestions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyQuestions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A38E6CCA66CE4AE4B2538A14 /* Pods-MyQuestions.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyQuestions.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyQuestions/Pods-MyQuestions.release.xcconfig"; sourceTree = "<group>"; };
+		B22E320D1EDBE8BA00ACC480 /* QuestionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
+		B22E320F1EDBF15F00ACC480 /* SelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCell.swift; sourceTree = "<group>"; };
 		B25843221EC0FCD900E5C0F9 /* MyQuestions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyQuestions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B25843251EC0FCD900E5C0F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B25843271EC0FCD900E5C0F9 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -101,8 +105,10 @@
 				B2C56D691ECC773300B9A303 /* ResultViewController.swift */,
 				B26183E61ED077F5006CB46A /* ResultCell.swift */,
 				B2C56D6B1ECC8F2400B9A303 /* AddCategoryViewController.swift */,
+				B22E320D1EDBE8BA00ACC480 /* QuestionCell.swift */,
 				B25843431EC73C7300E5C0F9 /* ConfigurationViewController.swift */,
 				B25843391EC1994C00E5C0F9 /* RealmDB.swift */,
+				B22E320F1EDBF15F00ACC480 /* SelectCell.swift */,
 				B26183E81ED189DE006CB46A /* CategoryDB.swift */,
 				B258432B1EC0FCD900E5C0F9 /* Main.storyboard */,
 				B25843301EC0FCD900E5C0F9 /* LaunchScreen.storyboard */,
@@ -248,6 +254,7 @@
 				B258432A1EC0FCD900E5C0F9 /* SecondViewController.swift in Sources */,
 				B25843441EC73C7300E5C0F9 /* ConfigurationViewController.swift in Sources */,
 				B26183E71ED077F5006CB46A /* ResultCell.swift in Sources */,
+				B22E320E1EDBE8BA00ACC480 /* QuestionCell.swift in Sources */,
 				B25843421EC73C6500E5C0F9 /* StartViewController.swift in Sources */,
 				B258433C1EC199EF00E5C0F9 /* QuestionViewController.swift in Sources */,
 				B25843461EC7448B00E5C0F9 /* SelectQuestionViewController.swift in Sources */,
@@ -255,6 +262,7 @@
 				B258433E1EC58ECB00E5C0F9 /* EditViewController.swift in Sources */,
 				B25843261EC0FCD900E5C0F9 /* AppDelegate.swift in Sources */,
 				B25843281EC0FCD900E5C0F9 /* FirstViewController.swift in Sources */,
+				B22E32101EDBF15F00ACC480 /* SelectCell.swift in Sources */,
 				B26183E91ED189DE006CB46A /* CategoryDB.swift in Sources */,
 				B258433A1EC1994C00E5C0F9 /* RealmDB.swift in Sources */,
 				B2C56D6C1ECC8F2400B9A303 /* AddCategoryViewController.swift in Sources */,

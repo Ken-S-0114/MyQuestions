@@ -87,9 +87,27 @@ class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITab
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    let cell = tableView.dequeueReusableCell(withIdentifier: "selectCell", for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: "selectCell", for: indexPath) as! SelectCell
     let object = questionItem[indexPath.row]
-    cell.textLabel?.text = object.title
+    var correctMark: Float = 0.0
+    var wrongMark: Float = 0.0
+    var rate: Float = 0.0
+    
+    correctMark = Float(object.correctMark)
+    wrongMark = Float(object.wrongMark)
+    
+    // nan表示にさせないための処理
+    if (object.correctMark == 0){
+      rate = 0.0
+    }else{
+      // 正答率を算出
+      rate = ((correctMark / (correctMark + wrongMark)) * 100)
+    }
+    // 小数第１位までを表示
+    let CGrate: CGFloat = CGFloat(rate)
+    let CGRate = String(format: "%.01f", Float(CGrate))
+
+    cell.setCell(category: String(object.category), rate: "正答率:\(CGRate)%", title: String(object.title))
     
     // セルが選択された時の背景色を消す
     cell.selectionStyle = UITableViewCellSelectionStyle.none

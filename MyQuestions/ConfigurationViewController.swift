@@ -12,6 +12,7 @@ class ConfigurationViewController: UIViewController, UIPickerViewDelegate, UIPic
   
   var limitCounter: [Int] = ([Int])(1...5)  // 回答回数を選択
   var limit: Int = 1                        // 回答回数
+  var rateCheck = Bool()
   // AppDelegateのインスタンスを取得
   let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
   
@@ -25,8 +26,29 @@ class ConfigurationViewController: UIViewController, UIPickerViewDelegate, UIPic
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    rateCheck = appDelegate.rateCheck
+    if (rateCheck == true){
+      rateSwitchView.isOn = true
+    }else{
+      rateSwitchView.isOn = false
+    }
+  }
     
   @IBOutlet weak var limitPickerView: UIPickerView!
+  @IBOutlet weak var rateLabelView: UILabel!
+  @IBOutlet weak var rateSwitchView: UISwitch!
+  
+  @IBAction func rateSwitch(_ sender: UISwitch) {
+    if (sender.isOn){
+      rateCheck = true
+    }else {
+      rateCheck = false
+    }
+    appDelegate.rateCheck = rateCheck
+  }
 
   @IBAction func decisionButton(_ sender: Any) {
     appDelegate.limit = limit//appDelegateの変数を操作

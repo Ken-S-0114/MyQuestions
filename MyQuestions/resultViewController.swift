@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class resultViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   
   var selectId: [Int] = []    // 選択された問題番号(Id)
   var correct: Float = 0.00   // 正解数
@@ -18,12 +18,13 @@ class resultViewController: UIViewController, UITableViewDelegate, UITableViewDa
   var mark: [String] = []     // ○×マーク
   var i: Int = 0              // 選択された問題を格納した配列の順番を指定
   var l: Int = 1              // 問題番号
+  //AppDelegateのインスタンスを取得
+  let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+
   
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view.
-    //AppDelegateのインスタンスを取得
-    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
     // 代入
     selectId = appDelegate.selectId
     correct = Float(appDelegate.correct)
@@ -81,7 +82,6 @@ class resultViewController: UIViewController, UITableViewDelegate, UITableViewDa
     i += 1
     return cell
   }
-  
 }
 
 
