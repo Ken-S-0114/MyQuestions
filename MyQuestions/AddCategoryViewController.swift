@@ -13,6 +13,8 @@ class AddCategoryViewController: UIViewController {
   
   var categoryItem: Results<CategoryDB>!
   var check: Bool = true        // 同じジャンル名があるかチェックする変数
+  // AppDelegateのインスタンスを取得
+  let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -62,21 +64,24 @@ class AddCategoryViewController: UIViewController {
       })
       
       // 保存したことを知らせるアラート表示
-      let alertController = UIAlertController(title: "保存しました", message: "問題作成に戻ります", preferredStyle: .alert)
+      let alertController = UIAlertController(title: "保存しました", message: nil, preferredStyle: .alert)
       let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
       alertController.addAction(alertAction)
       present(alertController, animated: true, completion: nil)
-      
-      let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate //AppDelegateのインスタンスを取得
+      //_ = self.navigationController?.popViewController(animated: true)
       let pop: String = appDelegate.pop
-      switch pop {
-        case "Second":
-        _ = navigationController?.popToViewController(SecondViewController(), animated: true)
-        case "Edit":
-        _ = navigationController?.popToViewController(EditViewController(), animated: true)
-      default:
-        print("エラー")
-      }
+      print(pop)
+//      switch pop {
+//        case "Second":
+//          let sc = self.destinationViewController as! SecondViewController
+//          self.present(sc, animated: true, completion: nil)
+//        print("Secondに移動")
+//        case "Edit":
+//        _ = navigationController?.popToViewController(EditViewController(), animated: true)
+//        print("Editに移動")
+//      default:
+//        print("エラー")
+//      }
     }
       // 答えが未入力の場合
     else {
@@ -87,6 +92,7 @@ class AddCategoryViewController: UIViewController {
     }
     
   }
-  
+
   @IBOutlet weak var newCategoryTextField: UITextField!
+  @IBAction func addBack(_ segue:UIStoryboardSegue){}
 }

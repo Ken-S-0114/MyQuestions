@@ -11,7 +11,9 @@ import RealmSwift
 
 class StartViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
   
-  var selectId: [Int] = []
+  var selectId: [Int] = []    // SelectQuestionViewControllerで選択された問題番号
+  // AppDelegateのインスタンスを取得
+  let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,7 +28,6 @@ class StartViewController: UIViewController, UINavigationControllerDelegate, UII
   }
   
   override func viewWillAppear(_ animated: Bool) {
-    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate //AppDelegateのインスタンスを取得
     selectId = appDelegate.selectId
     selectIdLabel.text! = "問題数：\(selectId.count)問"
     // 問題が選択している場合

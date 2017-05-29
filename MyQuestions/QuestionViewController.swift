@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 class QuestionViewController: UIViewController {
-
+  
   var questionItem: Results<RealmDB>!
   var selectId: [Int] = []    // 選択された問題(Id)
   var selectAnswer: String?   // 問題の答え
@@ -19,27 +19,29 @@ class QuestionViewController: UIViewController {
   var correct: Int = 0        // appDelegate用正解数
   var wrong: Int = 0          // appDelegate用不正解数
   var mark: [String] = []     // appDelegate用○×マーク
-  var correctmark: Int = 0    // RealmDB用正解数
-  var wrongmark: Int = 0      // RealmDB用不正解数
-  var i: Int = 0              // 問題数と比較する変数
+  var correctMark: Int = 0    // RealmDB用正解数
+  var wrongMark: Int = 0      // RealmDB用不正解数
+  var i: Int = 0              // 配列から指定の問題を取り出す変数
+  var selectCount: Int = 1    // 問題番号表示用
   
+  //AppDelegateのインスタンスを取得
+  let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
   
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view.
-    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate //AppDelegateのインスタンスを取得
     selectId = appDelegate.selectId
     limitCount = appDelegate.limit
     
     let realm = try! Realm()
     // 選択されたIDからRealmDBに保存してあるデータを表示
     let selectRealmDB = realm.object(ofType: RealmDB.self, forPrimaryKey: selectId[i] as AnyObject)
-    //categoryLabel.text? = (selectRealmDB?.category)!
+    categoryLabel.text = (selectRealmDB?.category)!
     titleLabel.text = (selectRealmDB?.title)!
     questionLabel.text = (selectRealmDB?.question)!
     levelLabel.text = (selectRealmDB?.level)!
-    correctmark = (selectRealmDB?.correctmark)!
-    wrongmark = (selectRealmDB?.wrongmark)!
+    correctMark = (selectRealmDB?.correctMark)!
+    wrongMark = (selectRealmDB?.wrongMark)!
     
     // 答えの欄を初期化
     answerTextField.text = ""
@@ -48,6 +50,10 @@ class QuestionViewController: UIViewController {
     
     checkButtonView.isEnabled = true
     nextQuestionButtonView.isEnabled = false
+    
+    selectCount = appDelegate.selectCount
+    self.navigationItem.title = String("第\(selectCount)問")
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -57,7 +63,7 @@ class QuestionViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
   }
-
+  
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     if(answerTextField.isFirstResponder) {
       answerTextField.resignFirstResponder()
@@ -74,7 +80,7 @@ class QuestionViewController: UIViewController {
   @IBOutlet weak var levelLabel: UILabel!
   @IBOutlet weak var nextQuestionButtonView: UIBarButtonItem!
   @IBOutlet weak var checkButtonView: UIButton!
-
+  
   @IBAction func nextQuestionButton(_ sender: Any) {
     if (i < selectId.count) {
       // 画面の再表示
@@ -87,18 +93,19 @@ class QuestionViewController: UIViewController {
       appDelegate.mark = mark
       performSegue(withIdentifier: "resultSegue", sender: nil)
     }
-
+    
   }
   
   // 答え合わせ
   @IBAction func checkButton(_ sender: Any) {
     let resultRealmDB = RealmDB()
+    resultRealmDB.category = (categoryLabel.text)!
     resultRealmDB.title = (titleLabel.text)!
     resultRealmDB.question = (questionLabel.text)!
     resultRealmDB.answer = selectAnswer!
     resultRealmDB.level = (levelLabel.text)!
     
-       // 答えが入力されているか確認
+    // 答えが入力されているか確認
     if (answerTextField.text != "") {
       // 正解の場合
       if (answerTextField.text == selectAnswer!) {
@@ -111,14 +118,14 @@ class QuestionViewController: UIViewController {
         
         // resultRealmDBに結果を蓄積
         resultRealmDB.id = selectId[i]
-        resultRealmDB.correctmark = correctmark + 1
-        resultRealmDB.wrongmark = wrongmark
+        resultRealmDB.correctMark = correctMark + 1
+        resultRealmDB.wrongMark = wrongMark
         
         // ボタンの表示を操作
         checkButtonView.isEnabled = false
         nextQuestionButtonView.isEnabled = true
       }
-      // 答えが間違っている場合
+        // 答えが間違っている場合
       else if (answerTextField.text != selectAnswer!) {
         // 設定した回数以内か確認
         if (answerCount < limitCount) {
@@ -137,30 +144,33 @@ class QuestionViewController: UIViewController {
           
           // resultRealmDBに結果を蓄積
           resultRealmDB.id = selectId[i]
-          resultRealmDB.wrongmark = wrongmark + 1
-          resultRealmDB.correctmark = correctmark
+          resultRealmDB.wrongMark = wrongMark + 1
+          resultRealmDB.correctMark = correctMark
           
           // ボタンの表示を操作
           checkButtonView.isEnabled = false
           nextQuestionButtonView.isEnabled = true
         }
       }
-    // 答えが未入力の場合
-    else {
-      let alertController = UIAlertController(title: "答えが入力されていません", message: nil, preferredStyle: .alert)
-      let alertAction = UIAlertAction(title: "もう一度", style: .default, handler: nil)
-      alertController.addAction(alertAction)
-      present(alertController, animated: true, completion: nil)
+        // 答えが未入力の場合
+      else {
+        let alertController = UIAlertController(title: "答えが入力されていません", message: nil, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "もう一度", style: .default, handler: nil)
+        alertController.addAction(alertAction)
+        present(alertController, animated: true, completion: nil)
+      }
+      // 上記で代入したテキストデータを永続化
+      let realm = try! Realm()
+      try! realm.write({ () -> Void in
+        realm.add(resultRealmDB, update: true)
+      })
+      
     }
-    // 上記で代入したテキストデータを永続化
-    let realm = try! Realm()
-    try! realm.write({ () -> Void in
-      realm.add(resultRealmDB, update: true)
-    })
-
-  }
     // 次の問題準備
+    selectCount += 1
     i += 1
+    appDelegate.selectCount = selectCount
+    print(selectCount)
   }
   
   

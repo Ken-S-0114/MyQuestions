@@ -12,12 +12,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
+  var selectTableId: Int = 0
   var selectId: [Int] = []
   var limit = Int()
   var correct: Int = 0
   var wrong: Int = 0
   var mark: [String] = []
   var pop = String()
+  var selectCount: Int = 1
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
    

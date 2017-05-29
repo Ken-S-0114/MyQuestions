@@ -17,6 +17,8 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
   var didCategorySelect = String()    // Pickerで選択した文字列の格納場所
   var count: Int = 0                  // CategoryDBに保存してあるデータ数
   var i: Int = 0                      // 比較する変数
+  //AppDelegateのインスタンスを取得
+  let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -33,7 +35,7 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
       categoryString += [object.name]
       i += 1
     }
-    // 初期化
+    // 比較する変数の初期化
     i = 0
 
     if (categoryString.isEmpty == false) {
@@ -63,7 +65,7 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
       // 配列の中身を初期化
       categoryString = []
       // CategoryDBに保存してある値を配列にあるだけ再度格納
-      while recount>i {
+      while recount > i {
         let object = categoryItem[i]
         categoryString += [object.name]
         i += 1
@@ -75,7 +77,12 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
       categoryPickerView.reloadAllComponents()
     }
     
+    if (categoryString.isEmpty == false) {
+      categoryPickerView.selectRow(0, inComponent: 0, animated: true)
+      didCategorySelect = categoryString[0]!
+    }
   }
+  
   
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var questionLabel: UILabel!
@@ -90,7 +97,7 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
   @IBOutlet weak var categoryPickerView: UIPickerView!
   
   @IBAction func addCategoryButton(_ sender: Any) {
-    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate //AppDelegateのインスタンスを取得
+    appDelegate.pop = ""
     appDelegate.pop = "Second"
     performSegue(withIdentifier: "addCategorySegue", sender: nil)
   }
@@ -126,8 +133,7 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
   // データを保存
   @IBAction func saveButton(_ sender: Any) {
     // 未入力項目がないか確認
-    if (titleTextView.text != "" || questionTextView.text != ""
-      || answerTextView.text != "" || didCategorySelect == "選択してください"){
+    if ((titleTextView.text != "") && (questionTextView.text != "") && (answerTextView.text != "") && (categoryString.isEmpty == false)){
       
       // 新しいインスタンスを生成
       let newRealmDB = RealmDB()

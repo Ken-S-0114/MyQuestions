@@ -12,8 +12,10 @@ class ConfigurationViewController: UIViewController, UIPickerViewDelegate, UIPic
   
   var limitCounter: [Int] = ([Int])(1...5)  // 回答回数を選択
   var limit: Int = 1                        // 回答回数
-
-    override func viewDidLoad() {
+  // AppDelegateのインスタンスを取得
+  let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+  
+  override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -27,7 +29,6 @@ class ConfigurationViewController: UIViewController, UIPickerViewDelegate, UIPic
   @IBOutlet weak var limitPickerView: UIPickerView!
 
   @IBAction func decisionButton(_ sender: Any) {
-    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate //AppDelegateのインスタンスを取得
     appDelegate.limit = limit//appDelegateの変数を操作
     _ = navigationController?.popViewController(animated: true)
   }

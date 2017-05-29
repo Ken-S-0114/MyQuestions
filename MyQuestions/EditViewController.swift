@@ -16,14 +16,14 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
   var count: Int = 0      // CategoryDBに保存してあるデータ数
   var l: Int = 0          // UIPickerの初期位置を格納
   var i: Int = 0          // 比較する変数
-
-  
+  //AppDelegateのインスタンスを取得
+  let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
   // Pickerに格納されている文字列
   var categoryString: [String?] = []
   // Pickerで選択した文字列の格納場所
   var didCategorySelect = String()
   // TableViewで選択されたデータのID
-  var selectedId = Int()
+  var selectTableId = Int()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -35,8 +35,11 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     questionItem = realm.objects(RealmDB.self)
     categoryItem = realms.objects(CategoryDB.self)
     
+    // 選択された問題番号
+    selectTableId = appDelegate.selectTableId
+    
     // 選択されたIDからRealmDBに保存してあるデータを表示
-    let editRealmDB = realm.object(ofType: RealmDB.self, forPrimaryKey: selectedId as AnyObject)
+    let editRealmDB = realm.object(ofType: RealmDB.self, forPrimaryKey: selectTableId as AnyObject)
     titleTextView.text = editRealmDB?.title
     questionTextView.text = editRealmDB?.question
     answerTextView.text = editRealmDB?.answer
@@ -48,21 +51,21 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     // Picker処理
     count = categoryItem.count
     // CategoryDBに保存してある値を配列に格納
-    while count>i {
+    while count > i {
       let object = categoryItem[i]
       categoryString += [object.name]
+      // 配列に同じジャンル名があるか検索
       if(didCategorySelect == object.name) {
-        // 同じジャンル名の配列番号記憶
-        l = i
+        l = i     // 同じジャンル名の配列番号記憶
       }
       i += 1
     }
+    categoryPickerView.reloadAllComponents()
     // 初期位置セット
     categoryPickerView.selectRow(l, inComponent: 0, animated: true)
-    categoryPickerView.reloadAllComponents()
     // 比較する変数の初期化
     i = 0
-
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -91,12 +94,12 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
         i += 1
       }
+      categoryPickerView.reloadAllComponents()
       i = 0
       // 個数更新
       count = recount
       // 初期位置セット
       categoryPickerView.selectRow(l, inComponent: 0, animated: true)
-      categoryPickerView.reloadAllComponents()
     }
   }
   
@@ -114,7 +117,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
   @IBOutlet weak var categoryPickerView: UIPickerView!
   
   @IBAction func addCategory(_ sender: Any) {
-    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate //AppDelegateのインスタンスを取得
+    appDelegate.pop = ""
     appDelegate.pop = "Edit"
     performSegue(withIdentifier: "addCategorySegue2", sender: nil)
   }
@@ -148,29 +151,39 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
   
   // データの上書き保存
   @IBAction func resaveButton(_ sender: Any) {
-    // 新しいインスタンスを生成
-    let editRealmDB = RealmDB()
-    // textField等に入力したデータをeditRealmDBに代入
-    editRealmDB.title = titleTextView.text!
-    editRealmDB.question = questionTextView.text!
-    editRealmDB.answer = answerTextView.text!
-    editRealmDB.category = didCategorySelect
-    editRealmDB.level = nowLabel.text!
-    editRealmDB.id = selectedId
-    
-    // 上記で代入したテキストデータを永続化
+    if ((titleTextView.text != "") && (questionTextView.text != "") && (answerTextView.text != "") && (categoryString.isEmpty == false)){
+      // 新しいインスタンスを生成
+      let editRealmDB = RealmDB()
+      // textField等に入力したデータをeditRealmDBに代入
+      editRealmDB.title = titleTextView.text!
+      editRealmDB.question = questionTextView.text!
+      editRealmDB.answer = answerTextView.text!
+      editRealmDB.category = didCategorySelect
+      editRealmDB.level = nowLabel.text!
+      editRealmDB.id = selectTableId
+      
+      // 上記で代入したテキストデータを永続化
       let realm = try! Realm()
       try! realm.write({ () -> Void in
         realm.add(editRealmDB, update: true)
       })
-    
-    // 上書き保存したことを知らせるアラート表示
-    let alertController = UIAlertController(title: "保存しました", message: "上書き保存します", preferredStyle: .alert)
-    let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-    alertController.addAction(alertAction)
-    present(alertController, animated: true, completion: nil)
-    _ = navigationController?.popViewController(animated: true)
+      
+      // 上書き保存したことを知らせるアラート表示
+      let alertController = UIAlertController(title: "保存しました", message: "上書き保存します", preferredStyle: .alert)
+      let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+      alertController.addAction(alertAction)
+      present(alertController, animated: true, completion: nil)
+      _ = navigationController?.popViewController(animated: true)
+    }
+    else {
+      // 未入力を知らせるアラート表示
+      let alertController = UIAlertController(title: "未入力項目が存在します", message: nil, preferredStyle: .alert)
+      let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+      alertController.addAction(alertAction)
+      present(alertController, animated: true, completion: nil)
+    }
   }
+  
   
   // 入力項目を全てリセット
   func reset() {

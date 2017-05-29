@@ -17,8 +17,8 @@ class RealmDB: Object {
   dynamic var answer: String = ""
   dynamic var category: String = ""
   dynamic var level: String = ""
-  dynamic var correctmark: Int = 0
-  dynamic var wrongmark: Int = 0
+  dynamic var correctMark: Int = 0
+  dynamic var wrongMark: Int = 0
   dynamic var date = NSDate()
   
   override static func primaryKey() -> String? {
