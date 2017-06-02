@@ -18,6 +18,10 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
   var mark: [String] = []     // ○×マーク
   var i: Int = 0              // 選択された問題を格納した配列の順番を指定
   var l: Int = 1              // 問題番号
+  
+  var questionItem: Results<RealmDB>!
+  var selectTableId = Int()    // 選択された問題番号
+  
   //AppDelegateのインスタンスを取得
   let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 
@@ -49,11 +53,17 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // 戻るボタン非表示
     self.navigationItem.hidesBackButton = true
+    print(selectId.count)
   }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    resultTableView.reloadData()
   }
   
   @IBOutlet weak var correctLabelView: UILabel!
@@ -68,6 +78,7 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
   func numberOfSections(in tableView: UITableView) -> Int {
     return 1;
   }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return selectId.count
   }
@@ -82,9 +93,28 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
     if let selectTitle = selectRealmDB?.title {
       cell.setCell(number: "第\(String(describing: l))問", title: String(describing: selectTitle), mark: String(mark[indexPath.row]))
     }
-    l += 1
-    i += 1
+    if (selectId.count<l){
+      l += 1    
+      i += 1
+    }
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+  
+    let realm = try! Realm()
+    questionItem = realm.objects(RealmDB.self)
+    print(questionItem)
+    let selectObject = questionItem[selectId[indexPath.row]]
+    selectTableId = selectObject.id
+    print(selectTableId)
+    performSegue(withIdentifier: "resultQuestionSegue", sender: nil)
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if (segue.identifier == "resultQuestionSegue") {
+      appDelegate.selectTableId = selectTableId
+    }
   }
 }
 

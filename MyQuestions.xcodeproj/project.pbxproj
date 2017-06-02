@@ -14,10 +14,11 @@
 		B22E32141EDC5EDF00ACC480 /* Quiz-Wrong_Buzzer02-3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B22E32131EDC5EDF00ACC480 /* Quiz-Wrong_Buzzer02-3.mp3 */; };
 		B22E32161EDC5FA800ACC480 /* Quiz-Wrong_Buzzer02-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B22E32151EDC5FA800ACC480 /* Quiz-Wrong_Buzzer02-2.mp3 */; };
 		B22E32181EDC675500ACC480 /* Geotica_2012.otf in Resources */ = {isa = PBXBuildFile; fileRef = B22E32171EDC675500ACC480 /* Geotica_2012.otf */; };
+		B22E321A1EDD46DF00ACC480 /* ResultQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22E32191EDD46DF00ACC480 /* ResultQuestionViewController.swift */; };
+		B22E321D1EDFFF3000ACC480 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B22E321B1EDFFF3000ACC480 /* Main.storyboard */; };
 		B25843261EC0FCD900E5C0F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25843251EC0FCD900E5C0F9 /* AppDelegate.swift */; };
 		B25843281EC0FCD900E5C0F9 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25843271EC0FCD900E5C0F9 /* FirstViewController.swift */; };
 		B258432A1EC0FCD900E5C0F9 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25843291EC0FCD900E5C0F9 /* SecondViewController.swift */; };
-		B258432D1EC0FCD900E5C0F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B258432B1EC0FCD900E5C0F9 /* Main.storyboard */; };
 		B258432F1EC0FCD900E5C0F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B258432E1EC0FCD900E5C0F9 /* Assets.xcassets */; };
 		B25843321EC0FCD900E5C0F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B25843301EC0FCD900E5C0F9 /* LaunchScreen.storyboard */; };
 		B258433A1EC1994C00E5C0F9 /* RealmDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25843391EC1994C00E5C0F9 /* RealmDB.swift */; };
@@ -40,11 +41,12 @@
 		B22E32131EDC5EDF00ACC480 /* Quiz-Wrong_Buzzer02-3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Quiz-Wrong_Buzzer02-3.mp3"; path = "../../../Downloads/Quiz-Wrong_Buzzer02-mp3/Quiz-Wrong_Buzzer02-3.mp3"; sourceTree = "<group>"; };
 		B22E32151EDC5FA800ACC480 /* Quiz-Wrong_Buzzer02-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Quiz-Wrong_Buzzer02-2.mp3"; path = "../../../Downloads/Quiz-Wrong_Buzzer02-mp3/Quiz-Wrong_Buzzer02-2.mp3"; sourceTree = "<group>"; };
 		B22E32171EDC675500ACC480 /* Geotica_2012.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Geotica_2012.otf; path = "../../../Downloads/geotica2012<c+23rq9q>/Geotica_2012.otf"; sourceTree = "<group>"; };
+		B22E32191EDD46DF00ACC480 /* ResultQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultQuestionViewController.swift; sourceTree = "<group>"; };
+		B22E321C1EDFFF3000ACC480 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B25843221EC0FCD900E5C0F9 /* MyQuestions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyQuestions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B25843251EC0FCD900E5C0F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B25843271EC0FCD900E5C0F9 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		B25843291EC0FCD900E5C0F9 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		B258432C1EC0FCD900E5C0F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B258432E1EC0FCD900E5C0F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B25843311EC0FCD900E5C0F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B25843331EC0FCD900E5C0F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -113,11 +115,12 @@
 				B22E320D1EDBE8BA00ACC480 /* QuestionCell.swift */,
 				B25843431EC73C7300E5C0F9 /* ConfigurationViewController.swift */,
 				B25843391EC1994C00E5C0F9 /* RealmDB.swift */,
+				B22E32191EDD46DF00ACC480 /* ResultQuestionViewController.swift */,
 				B22E320F1EDBF15F00ACC480 /* SelectCell.swift */,
 				B26183E81ED189DE006CB46A /* CategoryDB.swift */,
-				B22E32171EDC675500ACC480 /* Geotica_2012.otf */,
-				B258432B1EC0FCD900E5C0F9 /* Main.storyboard */,
 				B25843301EC0FCD900E5C0F9 /* LaunchScreen.storyboard */,
+				B22E321B1EDFFF3000ACC480 /* Main.storyboard */,
+				B22E32171EDC675500ACC480 /* Geotica_2012.otf */,
 				B22E32111EDC5BE200ACC480 /* Quiz-Correct_Answer01-1.mp3 */,
 				B22E32151EDC5FA800ACC480 /* Quiz-Wrong_Buzzer02-2.mp3 */,
 				B22E32131EDC5EDF00ACC480 /* Quiz-Wrong_Buzzer02-3.mp3 */,
@@ -199,11 +202,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B22E321D1EDFFF3000ACC480 /* Main.storyboard in Resources */,
 				B22E32141EDC5EDF00ACC480 /* Quiz-Wrong_Buzzer02-3.mp3 in Resources */,
 				B25843321EC0FCD900E5C0F9 /* LaunchScreen.storyboard in Resources */,
 				B22E32181EDC675500ACC480 /* Geotica_2012.otf in Resources */,
 				B258432F1EC0FCD900E5C0F9 /* Assets.xcassets in Resources */,
-				B258432D1EC0FCD900E5C0F9 /* Main.storyboard in Resources */,
 				B22E32161EDC5FA800ACC480 /* Quiz-Wrong_Buzzer02-2.mp3 in Resources */,
 				B22E32121EDC5BE200ACC480 /* Quiz-Correct_Answer01-1.mp3 in Resources */,
 			);
@@ -266,6 +269,7 @@
 			files = (
 				B258432A1EC0FCD900E5C0F9 /* SecondViewController.swift in Sources */,
 				B25843441EC73C7300E5C0F9 /* ConfigurationViewController.swift in Sources */,
+				B22E321A1EDD46DF00ACC480 /* ResultQuestionViewController.swift in Sources */,
 				B26183E71ED077F5006CB46A /* ResultCell.swift in Sources */,
 				B22E320E1EDBE8BA00ACC480 /* QuestionCell.swift in Sources */,
 				B25843421EC73C6500E5C0F9 /* StartViewController.swift in Sources */,
@@ -284,10 +288,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B258432B1EC0FCD900E5C0F9 /* Main.storyboard */ = {
+		B22E321B1EDFFF3000ACC480 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B258432C1EC0FCD900E5C0F9 /* Base */,
+				B22E321C1EDFFF3000ACC480 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

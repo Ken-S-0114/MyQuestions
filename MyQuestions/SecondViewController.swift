@@ -156,6 +156,18 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
         })
         self.viewWillAppear(true)
       }
+      else if(newAddCategory.name.isEmpty == true){
+        // アクションシートの親となる UIView を設定
+        alert.popoverPresentationController?.sourceView = self.view
+        
+        // 吹き出しの出現箇所を CGRect で設定 （これはナビゲーションバーから吹き出しを出す例）
+        alert.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
+        let alertController = UIAlertController(title: "入力されていません", message: "作成画面に戻ります", preferredStyle: .actionSheet)
+        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true, completion: nil)
+
+      }
     })
     alert.addAction(saveAction)
     
