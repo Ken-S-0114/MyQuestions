@@ -43,6 +43,16 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
       categoryPickerView.selectRow(0, inComponent: 0, animated: true)
       didCategorySelect = categoryString[0]!
     }
+    
+    // 枠のカラー
+    questionTextView.layer.borderColor = UIColor.gray.cgColor
+    
+    // 枠の幅
+    questionTextView.layer.borderWidth = 0.5
+    
+    // 枠を角丸にする場合
+    questionTextView.layer.cornerRadius = 10.0
+    questionTextView.layer.masksToBounds = true
     // levelの初期値
     nowLevel.text = "5"
   }
@@ -79,12 +89,9 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
       // 比較する変数の初期化
       i = 0
       count = recount
-//      recount = recount - 1
-//      print(count)
+
       categoryPickerView.reloadAllComponents()
-//      categoryPickerView.selectRow(count, inComponent: 0, animated: true)
-//      didCategorySelect = categoryString[recount]!
-//      print(didCategorySelect)
+
     }
     
   }
@@ -98,7 +105,7 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
   @IBOutlet weak var nowLevel: UILabel!
   
   @IBOutlet weak var titleTextView: UITextField!
-  @IBOutlet weak var questionTextView: UITextField!
+  @IBOutlet weak var questionTextView: UITextView!
   @IBOutlet weak var answerTextView: UITextField!
   @IBOutlet weak var categoryPickerView: UIPickerView!
   
@@ -115,10 +122,10 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
       let newAddCategory = CategoryDB()
       //textField等に入力したデータをnewAddCategoryに代入
       newAddCategory.name = alert.textFields![0].text!
-      //既にデータが他に作成してある場合
-      if self.categoryItem.count != 0 {
-        newAddCategory.id = self.categoryItem.max(ofProperty: "id")! + 1
-      }
+//      //既にデータが他に作成してある場合
+//      if self.categoryItem.count != 0 {
+//        newAddCategory.id = self.categoryItem.max(ofProperty: "id")! + 1
+//      }
       
       while_i: while self.categoryItem.count > i {
         // 同じジャンル名があるかDB上でチェック
@@ -131,6 +138,11 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
           let alertController = UIAlertController(title: "保存失敗", message: "同じ名前のジャンルが既に存在します", preferredStyle: .actionSheet)
           let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
           alertController.addAction(alertAction)
+          
+          //　iPad用クラッシュさせないために
+          alertController.popoverPresentationController?.sourceView = self.view;
+          alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
+
           self.present(alertController, animated: true, completion: nil)
           self.check = false
           break while_i
@@ -148,13 +160,28 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
         let alertController = UIAlertController(title: "保存しました", message: nil, preferredStyle: .actionSheet)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(alertAction)
+        
+        //　iPad用クラッシュさせないために
+        alertController.popoverPresentationController?.sourceView = self.view;
+        alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
+        
         self.present(alertController, animated: true, completion: nil)
+        
+        //既にデータが他に作成してある場合
+        if self.categoryItem.count != 0 {
+          newAddCategory.id = self.categoryItem.max(ofProperty: "id")! + 1
+        }
+
         
         //上記で代入したテキストデータを永続化
         try! realms.write({ () -> Void in
           realms.add(newAddCategory, update: false)
         })
         self.viewWillAppear(true)
+        
+        let object = self.categoryItem[0]
+        self.categoryString += [object.name]
+        self.didCategorySelect = self.categoryString[0]!
       }
       else if(newAddCategory.name.isEmpty == true){
         // アクションシートの親となる UIView を設定
@@ -165,6 +192,11 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
         let alertController = UIAlertController(title: "入力されていません", message: "作成画面に戻ります", preferredStyle: .actionSheet)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(alertAction)
+        
+        //　iPad用クラッシュさせないために
+        alertController.popoverPresentationController?.sourceView = self.view;
+        alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
+
         self.present(alertController, animated: true, completion: nil)
 
       }
@@ -180,6 +212,8 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
       textField.placeholder = "カテゴリーを入力してください"
     })
     present(alert, animated: true, completion: nil)
+    
+    
     
   }
   
@@ -236,9 +270,14 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
         realm.add(newRealmDB, update: false)
       })
       // 保存したことを知らせるアラート表示
-      let alertController = UIAlertController(title: "保存しました", message: "問題一覧に戻ります", preferredStyle: .alert)
+      let alertController = UIAlertController(title: "保存しました", message: nil, preferredStyle: .alert)
       let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
       alertController.addAction(alertAction)
+      
+      //　iPad用クラッシュさせないために
+      alertController.popoverPresentationController?.sourceView = self.view;
+      alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
+
       present(alertController, animated: true, completion: nil)
       reset()
       }else {
@@ -246,6 +285,11 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
       let alertController = UIAlertController(title: "未入力項目が存在します", message: nil, preferredStyle: .alert)
       let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
       alertController.addAction(alertAction)
+      
+      //　iPad用クラッシュさせないために
+      alertController.popoverPresentationController?.sourceView = self.view;
+      alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
+
       present(alertController, animated: true, completion: nil)
     }
   }

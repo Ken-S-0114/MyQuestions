@@ -67,6 +67,17 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     // 比較する変数の初期化
     i = 0
     
+    // 枠のカラー
+    questionTextView.layer.borderColor = UIColor.gray.cgColor
+    
+    // 枠の幅
+    questionTextView.layer.borderWidth = 0.5
+    
+    // 枠を角丸にする場合
+    questionTextView.layer.cornerRadius = 10.0
+    questionTextView.layer.masksToBounds = true
+
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -113,7 +124,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
   @IBOutlet weak var nowLabel: UILabel!
   
   @IBOutlet weak var titleTextView: UITextField!
-  @IBOutlet weak var questionTextView: UITextField!
+  @IBOutlet weak var questionTextView: UITextView!
   @IBOutlet weak var answerTextView: UITextField!
   @IBOutlet weak var categoryPickerView: UIPickerView!
   
@@ -129,10 +140,10 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
       let newAddCategory = CategoryDB()
       //textField等に入力したデータをnewAddCategoryに代入
       newAddCategory.name = alert.textFields![0].text!
-      //既にデータが他に作成してある場合
-      if self.categoryItem.count != 0 {
-        newAddCategory.id = self.categoryItem.max(ofProperty: "id")! + 1
-      }
+//      //既にデータが他に作成してある場合
+//      if self.categoryItem.count != 0 {
+//        newAddCategory.id = self.categoryItem.max(ofProperty: "id")! + 1
+//      }
       
       //上記で代入したテキストデータを永続化
       
@@ -147,6 +158,11 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
           let alertController = UIAlertController(title: "保存失敗", message: "同じ名前のジャンルが既に存在します", preferredStyle: .actionSheet)
           let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
           alertController.addAction(alertAction)
+          
+          //　iPad用クラッシュさせないために
+          alertController.popoverPresentationController?.sourceView = self.view;
+          alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
+
           self.present(alertController, animated: true, completion: nil)
           self.check = false
           break while_i
@@ -164,8 +180,18 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         let alertController = UIAlertController(title: "保存しました", message: nil, preferredStyle: .actionSheet)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(alertAction)
+        
+        //　iPad用クラッシュさせないために
+        alertController.popoverPresentationController?.sourceView = self.view;
+        alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
+
         self.present(alertController, animated: true, completion: nil)
         
+        //既にデータが他に作成してある場合
+        if self.categoryItem.count != 0 {
+          newAddCategory.id = self.categoryItem.max(ofProperty: "id")! + 1
+        }
+
         //上記で代入したテキストデータを永続化
         try! realms.write({ () -> Void in
           realms.add(newAddCategory, update: false)
@@ -185,6 +211,10 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
       textField.placeholder = "カテゴリーを入力してください"
     })
     
+    //　iPad用クラッシュさせないために
+    alert.popoverPresentationController?.sourceView = self.view;
+    alert.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
+
     present(alert, animated: true, completion: nil)
 
     viewWillAppear(true)
@@ -240,6 +270,11 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
       let alertController = UIAlertController(title: "保存しました", message: "上書き保存しました", preferredStyle: .alert)
       let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
       alertController.addAction(alertAction)
+      
+      //　iPad用クラッシュさせないために
+      alertController.popoverPresentationController?.sourceView = self.view;
+      alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
+
       present(alertController, animated: true, completion: nil)
       
     }else {
@@ -247,6 +282,11 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
       let alertController = UIAlertController(title: "未入力項目が存在します", message: nil, preferredStyle: .alert)
       let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
       alertController.addAction(alertAction)
+      
+      //　iPad用クラッシュさせないために
+      alertController.popoverPresentationController?.sourceView = self.view;
+      alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
+
       present(alertController, animated: true, completion: nil)
     }
     

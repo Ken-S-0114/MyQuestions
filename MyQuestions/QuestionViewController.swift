@@ -132,6 +132,10 @@ class QuestionViewController: UIViewController, UITextFieldDelegate {
         alertController.addAction(alertAction)
         correct += 1
         mark += ["○"];
+        //　iPad用クラッシュさせないために
+        alertController.popoverPresentationController?.sourceView = self.view;
+        alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
+
         present(alertController, animated: true, completion: nil)
         
         if (rateCheck == true){
@@ -172,6 +176,11 @@ class QuestionViewController: UIViewController, UITextFieldDelegate {
           let alertController = UIAlertController(title: "不正解", message: "残りあと\((limitCount)-answerCount)回", preferredStyle: .alert)
           let alertAction = UIAlertAction(title: "もう一度", style: .default, handler: nil)
           alertController.addAction(alertAction)
+          
+          //　iPad用クラッシュさせないために
+          alertController.popoverPresentationController?.sourceView = self.view;
+          alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
+
           present(alertController, animated: true, completion: nil)
           answerCount += 1
           
@@ -183,11 +192,15 @@ class QuestionViewController: UIViewController, UITextFieldDelegate {
           alertController.addAction(alertAction)
           wrong += 1
           mark += ["×"];
+          
+          //　iPad用クラッシュさせないために
+          alertController.popoverPresentationController?.sourceView = self.view;
+          alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
+
           present(alertController, animated: true, completion: nil)
           
           if (rateCheck == true){
             // resultRealmDBに結果を蓄積
-            print(selectId[i])
             let resultRealmDB = RealmDB()
             resultRealmDB.id = selectId[i]
             
@@ -210,7 +223,6 @@ class QuestionViewController: UIViewController, UITextFieldDelegate {
           // 次の問題準備
           selectCount += 1
           i += 1
-          print(i)
           appDelegate.selectCount = selectCount
           
           // ボタンの表示を操作
@@ -223,6 +235,11 @@ class QuestionViewController: UIViewController, UITextFieldDelegate {
         let alertController = UIAlertController(title: "答えが入力されていません", message: nil, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "もう一度", style: .default, handler: nil)
         alertController.addAction(alertAction)
+        
+        //　iPad用クラッシュさせないために
+        alertController.popoverPresentationController?.sourceView = self.view;
+        alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
+
         present(alertController, animated: true, completion: nil)
       }
     }

@@ -53,7 +53,6 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // 戻るボタン非表示
     self.navigationItem.hidesBackButton = true
-    print(selectId.count)
   }
   
   override func didReceiveMemoryWarning() {
@@ -104,10 +103,8 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
   
     let realm = try! Realm()
     questionItem = realm.objects(RealmDB.self)
-    print(questionItem)
     let selectObject = questionItem[selectId[indexPath.row]]
     selectTableId = selectObject.id
-    print(selectTableId)
     performSegue(withIdentifier: "resultQuestionSegue", sender: nil)
   }
   
