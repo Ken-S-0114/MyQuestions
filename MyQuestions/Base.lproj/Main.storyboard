@@ -241,13 +241,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="答え：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Haj-FV-jFh">
-                                <rect key="frame" x="36" y="282.5" width="173" height="21"/>
+                                <rect key="frame" x="36" y="283" width="173" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="答えを入力してください" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="emE-Op-Ffe">
-                                <rect key="frame" x="36" y="308.5" width="303" height="30"/>
+                                <rect key="frame" x="36" y="309" width="303" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -256,7 +256,7 @@
                                 </connections>
                             </textField>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05h-cE-oBy">
-                                <rect key="frame" x="36" y="370" width="303" height="150"/>
+                                <rect key="frame" x="36" y="370.5" width="303" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="LQI-fE-TUl"/>
                                 </constraints>
@@ -289,31 +289,31 @@
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0C2-Jv-6rb">
-                                <rect key="frame" x="299" y="528" width="10" height="25"/>
+                                <rect key="frame" x="299.5" y="528.5" width="9.5" height="24.5"/>
                                 <fontDescription key="fontDescription" name="Geotica2012-Regular" family="Geotica 2012" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEY-Nf-d7M">
-                                <rect key="frame" x="307" y="348" width="22" height="22"/>
+                                <rect key="frame" x="307" y="348.5" width="22" height="22"/>
                                 <connections>
                                     <action selector="addCategory:" destination="zPS-5O-FTX" eventType="touchUpInside" id="OK2-aS-FOh"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xaJ-Dx-0t8">
-                                <rect key="frame" x="36" y="181" width="303" height="91.5"/>
+                                <rect key="frame" x="36" y="181" width="303" height="92"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="難易度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKy-X3-KVP">
-                                <rect key="frame" x="36" y="530" width="52" height="21"/>
+                                <rect key="frame" x="36" y="530.5" width="52" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ジャンル選択：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uoi-sB-S1k">
-                                <rect key="frame" x="36" y="348.5" width="173" height="21"/>
+                                <rect key="frame" x="36" y="349" width="173" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -367,7 +367,7 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="問題編集" id="cuN-no-e7c">
-                        <barButtonItem key="rightBarButtonItem" title="保存" id="MCk-0j-9GA">
+                        <barButtonItem key="rightBarButtonItem" image="save48px" id="MCk-0j-9GA">
                             <connections>
                                 <action selector="resaveButton:" destination="zPS-5O-FTX" id="uHz-Vy-Srg"/>
                             </connections>
@@ -544,7 +544,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="問題作成" id="xjT-SN-nqB">
-                        <barButtonItem key="rightBarButtonItem" title="保存" id="9pz-uc-6k6">
+                        <barButtonItem key="rightBarButtonItem" image="save48px" id="9pz-uc-6k6">
                             <connections>
                                 <action selector="saveButton:" destination="8rJ-Kc-sve" id="Eee-k4-iew"/>
                             </connections>
@@ -794,7 +794,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="設定" id="ARn-er-ZIT">
-                        <barButtonItem key="rightBarButtonItem" title="決定" id="daX-eH-HVk">
+                        <barButtonItem key="rightBarButtonItem" image="save48px" id="daX-eH-HVk">
                             <connections>
                                 <action selector="decisionButton:" destination="t3V-Oi-K7t" id="E4d-di-voq"/>
                             </connections>
@@ -979,7 +979,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uec-RL-ZvU">
-                                <rect key="frame" x="304.5" y="41" width="24.5" height="43.5"/>
+                                <rect key="frame" x="304.5" y="40.5" width="24.5" height="43.5"/>
                                 <fontDescription key="fontDescription" name="Geotica2012-Regular" family="Geotica 2012" pointSize="36"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1078,7 +1078,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="結果" id="ZBk-nD-0w6">
-                        <barButtonItem key="rightBarButtonItem" title="Topに戻る" id="0yX-eC-Gud">
+                        <barButtonItem key="rightBarButtonItem" image="home48px" id="0yX-eC-Gud">
                             <connections>
                                 <action selector="resultButton:" destination="Pce-jK-STd" id="0XL-Ai-STx"/>
                             </connections>
@@ -1225,8 +1225,10 @@
     <resources>
         <image name="book64px" width="32" height="32"/>
         <image name="configuration48px" width="24" height="24"/>
+        <image name="home48px" width="24" height="24"/>
         <image name="paper64px" width="32" height="32"/>
         <image name="right48px" width="24" height="24"/>
+        <image name="save48px" width="24" height="24"/>
         <image name="test64px" width="32" height="32"/>
         <image name="wrong48px" width="24" height="24"/>
     </resources>
