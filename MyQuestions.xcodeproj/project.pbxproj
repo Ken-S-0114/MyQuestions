@@ -8,57 +8,61 @@
 
 /* Begin PBXBuildFile section */
 		422CF45B74C731F2D85B72CF /* Pods_MyQuestions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B18D8FA0FFF723EE731FC98 /* Pods_MyQuestions.framework */; };
-		B22E320E1EDBE8BA00ACC480 /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22E320D1EDBE8BA00ACC480 /* QuestionCell.swift */; };
-		B22E32101EDBF15F00ACC480 /* SelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22E320F1EDBF15F00ACC480 /* SelectCell.swift */; };
 		B22E32121EDC5BE200ACC480 /* Quiz-Correct_Answer01-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B22E32111EDC5BE200ACC480 /* Quiz-Correct_Answer01-1.mp3 */; };
 		B22E32141EDC5EDF00ACC480 /* Quiz-Wrong_Buzzer02-3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B22E32131EDC5EDF00ACC480 /* Quiz-Wrong_Buzzer02-3.mp3 */; };
 		B22E32161EDC5FA800ACC480 /* Quiz-Wrong_Buzzer02-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B22E32151EDC5FA800ACC480 /* Quiz-Wrong_Buzzer02-2.mp3 */; };
-		B22E32181EDC675500ACC480 /* Geotica_2012.otf in Resources */ = {isa = PBXBuildFile; fileRef = B22E32171EDC675500ACC480 /* Geotica_2012.otf */; };
-		B22E321A1EDD46DF00ACC480 /* ResultQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22E32191EDD46DF00ACC480 /* ResultQuestionViewController.swift */; };
 		B22E321D1EDFFF3000ACC480 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B22E321B1EDFFF3000ACC480 /* Main.storyboard */; };
 		B25843261EC0FCD900E5C0F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25843251EC0FCD900E5C0F9 /* AppDelegate.swift */; };
-		B25843281EC0FCD900E5C0F9 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25843271EC0FCD900E5C0F9 /* FirstViewController.swift */; };
-		B258432A1EC0FCD900E5C0F9 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25843291EC0FCD900E5C0F9 /* SecondViewController.swift */; };
 		B258432F1EC0FCD900E5C0F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B258432E1EC0FCD900E5C0F9 /* Assets.xcassets */; };
 		B25843321EC0FCD900E5C0F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B25843301EC0FCD900E5C0F9 /* LaunchScreen.storyboard */; };
-		B258433A1EC1994C00E5C0F9 /* RealmDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25843391EC1994C00E5C0F9 /* RealmDB.swift */; };
-		B258433C1EC199EF00E5C0F9 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B258433B1EC199EF00E5C0F9 /* QuestionViewController.swift */; };
-		B258433E1EC58ECB00E5C0F9 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B258433D1EC58ECB00E5C0F9 /* EditViewController.swift */; };
-		B25843421EC73C6500E5C0F9 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25843411EC73C6500E5C0F9 /* StartViewController.swift */; };
-		B25843441EC73C7300E5C0F9 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25843431EC73C7300E5C0F9 /* ConfigurationViewController.swift */; };
-		B25843461EC7448B00E5C0F9 /* SelectQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25843451EC7448B00E5C0F9 /* SelectQuestionViewController.swift */; };
-		B26183E71ED077F5006CB46A /* ResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26183E61ED077F5006CB46A /* ResultCell.swift */; };
-		B26183E91ED189DE006CB46A /* CategoryDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26183E81ED189DE006CB46A /* CategoryDB.swift */; };
-		B2C56D6A1ECC773300B9A303 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C56D691ECC773300B9A303 /* ResultViewController.swift */; };
+		B260D5C81F3AABD6003388C2 /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260D5C51F3AABD6003388C2 /* QuestionCell.swift */; };
+		B260D5C91F3AABD6003388C2 /* ResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260D5C61F3AABD6003388C2 /* ResultCell.swift */; };
+		B260D5CA1F3AABD6003388C2 /* SelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260D5C71F3AABD6003388C2 /* SelectCell.swift */; };
+		B260D5CE1F3AABDD003388C2 /* CategoryDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260D5CC1F3AABDD003388C2 /* CategoryDB.swift */; };
+		B260D5CF1F3AABDD003388C2 /* RealmDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260D5CD1F3AABDD003388C2 /* RealmDB.swift */; };
+		B260D5DD1F3AABE2003388C2 /* AddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260D5D11F3AABE2003388C2 /* AddCategoryViewController.swift */; };
+		B260D5DE1F3AABE2003388C2 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260D5D21F3AABE2003388C2 /* ConfigurationViewController.swift */; };
+		B260D5DF1F3AABE2003388C2 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260D5D31F3AABE2003388C2 /* EditViewController.swift */; };
+		B260D5E01F3AABE2003388C2 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260D5D41F3AABE2003388C2 /* FirstViewController.swift */; };
+		B260D5E11F3AABE2003388C2 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260D5D51F3AABE2003388C2 /* QuestionViewController.swift */; };
+		B260D5E21F3AABE2003388C2 /* ResultQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260D5D61F3AABE2003388C2 /* ResultQuestionViewController.swift */; };
+		B260D5E31F3AABE2003388C2 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260D5D71F3AABE2003388C2 /* ResultViewController.swift */; };
+		B260D5E41F3AABE2003388C2 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260D5D81F3AABE2003388C2 /* SecondViewController.swift */; };
+		B260D5E51F3AABE2003388C2 /* SelectQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260D5D91F3AABE2003388C2 /* SelectQuestionViewController.swift */; };
+		B260D5E61F3AABE2003388C2 /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260D5DA1F3AABE2003388C2 /* SelectViewController.swift */; };
+		B260D5E71F3AABE2003388C2 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260D5DB1F3AABE2003388C2 /* StartViewController.swift */; };
+		B260D5E81F3AABE2003388C2 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260D5DC1F3AABE2003388C2 /* TopViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8B18D8FA0FFF723EE731FC98 /* Pods_MyQuestions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyQuestions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A38E6CCA66CE4AE4B2538A14 /* Pods-MyQuestions.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyQuestions.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyQuestions/Pods-MyQuestions.release.xcconfig"; sourceTree = "<group>"; };
-		B22E320D1EDBE8BA00ACC480 /* QuestionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
-		B22E320F1EDBF15F00ACC480 /* SelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCell.swift; sourceTree = "<group>"; };
 		B22E32111EDC5BE200ACC480 /* Quiz-Correct_Answer01-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Quiz-Correct_Answer01-1.mp3"; path = "../../../Downloads/Quiz-Correct_Answer01-mp3/Quiz-Correct_Answer01-1.mp3"; sourceTree = "<group>"; };
 		B22E32131EDC5EDF00ACC480 /* Quiz-Wrong_Buzzer02-3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Quiz-Wrong_Buzzer02-3.mp3"; path = "../../../Downloads/Quiz-Wrong_Buzzer02-mp3/Quiz-Wrong_Buzzer02-3.mp3"; sourceTree = "<group>"; };
 		B22E32151EDC5FA800ACC480 /* Quiz-Wrong_Buzzer02-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Quiz-Wrong_Buzzer02-2.mp3"; path = "../../../Downloads/Quiz-Wrong_Buzzer02-mp3/Quiz-Wrong_Buzzer02-2.mp3"; sourceTree = "<group>"; };
-		B22E32171EDC675500ACC480 /* Geotica_2012.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Geotica_2012.otf; path = "../../../Downloads/geotica2012<c+23rq9q>/Geotica_2012.otf"; sourceTree = "<group>"; };
-		B22E32191EDD46DF00ACC480 /* ResultQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultQuestionViewController.swift; sourceTree = "<group>"; };
 		B22E321C1EDFFF3000ACC480 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B25843221EC0FCD900E5C0F9 /* MyQuestions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyQuestions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B25843251EC0FCD900E5C0F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B25843271EC0FCD900E5C0F9 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		B25843291EC0FCD900E5C0F9 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		B258432E1EC0FCD900E5C0F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B25843311EC0FCD900E5C0F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B25843331EC0FCD900E5C0F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B25843391EC1994C00E5C0F9 /* RealmDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmDB.swift; sourceTree = "<group>"; };
-		B258433B1EC199EF00E5C0F9 /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
-		B258433D1EC58ECB00E5C0F9 /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
-		B25843411EC73C6500E5C0F9 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
-		B25843431EC73C7300E5C0F9 /* ConfigurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
-		B25843451EC7448B00E5C0F9 /* SelectQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectQuestionViewController.swift; sourceTree = "<group>"; };
-		B26183E61ED077F5006CB46A /* ResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultCell.swift; sourceTree = "<group>"; };
-		B26183E81ED189DE006CB46A /* CategoryDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryDB.swift; sourceTree = "<group>"; };
-		B2C56D691ECC773300B9A303 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		B260D5C51F3AABD6003388C2 /* QuestionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
+		B260D5C61F3AABD6003388C2 /* ResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultCell.swift; sourceTree = "<group>"; };
+		B260D5C71F3AABD6003388C2 /* SelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCell.swift; sourceTree = "<group>"; };
+		B260D5CC1F3AABDD003388C2 /* CategoryDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryDB.swift; sourceTree = "<group>"; };
+		B260D5CD1F3AABDD003388C2 /* RealmDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmDB.swift; sourceTree = "<group>"; };
+		B260D5D11F3AABE2003388C2 /* AddCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCategoryViewController.swift; sourceTree = "<group>"; };
+		B260D5D21F3AABE2003388C2 /* ConfigurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
+		B260D5D31F3AABE2003388C2 /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		B260D5D41F3AABE2003388C2 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		B260D5D51F3AABE2003388C2 /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		B260D5D61F3AABE2003388C2 /* ResultQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultQuestionViewController.swift; sourceTree = "<group>"; };
+		B260D5D71F3AABE2003388C2 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		B260D5D81F3AABE2003388C2 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		B260D5D91F3AABE2003388C2 /* SelectQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectQuestionViewController.swift; sourceTree = "<group>"; };
+		B260D5DA1F3AABE2003388C2 /* SelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectViewController.swift; sourceTree = "<group>"; };
+		B260D5DB1F3AABE2003388C2 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		B260D5DC1F3AABE2003388C2 /* TopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
 		E0F74971E4AE348C54C106BA /* Pods-MyQuestions.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyQuestions.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyQuestions/Pods-MyQuestions.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +84,16 @@
 				8B18D8FA0FFF723EE731FC98 /* Pods_MyQuestions.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B25038251F3AA6E500247149 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				B22E32111EDC5BE200ACC480 /* Quiz-Correct_Answer01-1.mp3 */,
+				B22E32151EDC5FA800ACC480 /* Quiz-Wrong_Buzzer02-2.mp3 */,
+				B22E32131EDC5EDF00ACC480 /* Quiz-Wrong_Buzzer02-3.mp3 */,
+			);
+			name = Sound;
 			sourceTree = "<group>";
 		};
 		B25843191EC0FCD900E5C0F9 = {
@@ -104,30 +118,54 @@
 			isa = PBXGroup;
 			children = (
 				B25843251EC0FCD900E5C0F9 /* AppDelegate.swift */,
-				B25843271EC0FCD900E5C0F9 /* FirstViewController.swift */,
-				B25843291EC0FCD900E5C0F9 /* SecondViewController.swift */,
-				B258433D1EC58ECB00E5C0F9 /* EditViewController.swift */,
-				B258433B1EC199EF00E5C0F9 /* QuestionViewController.swift */,
-				B25843411EC73C6500E5C0F9 /* StartViewController.swift */,
-				B25843451EC7448B00E5C0F9 /* SelectQuestionViewController.swift */,
-				B2C56D691ECC773300B9A303 /* ResultViewController.swift */,
-				B25843431EC73C7300E5C0F9 /* ConfigurationViewController.swift */,
-				B22E32191EDD46DF00ACC480 /* ResultQuestionViewController.swift */,
-				B22E320D1EDBE8BA00ACC480 /* QuestionCell.swift */,
-				B26183E61ED077F5006CB46A /* ResultCell.swift */,
-				B22E320F1EDBF15F00ACC480 /* SelectCell.swift */,
-				B25843391EC1994C00E5C0F9 /* RealmDB.swift */,
-				B26183E81ED189DE006CB46A /* CategoryDB.swift */,
+				B260D5D01F3AABE2003388C2 /* ViewController */,
+				B260D5CB1F3AABDD003388C2 /* Realm */,
+				B260D5C41F3AABD6003388C2 /* Cell */,
+				B25038251F3AA6E500247149 /* Sound */,
 				B25843301EC0FCD900E5C0F9 /* LaunchScreen.storyboard */,
 				B22E321B1EDFFF3000ACC480 /* Main.storyboard */,
-				B22E32171EDC675500ACC480 /* Geotica_2012.otf */,
-				B22E32111EDC5BE200ACC480 /* Quiz-Correct_Answer01-1.mp3 */,
-				B22E32151EDC5FA800ACC480 /* Quiz-Wrong_Buzzer02-2.mp3 */,
-				B22E32131EDC5EDF00ACC480 /* Quiz-Wrong_Buzzer02-3.mp3 */,
 				B258432E1EC0FCD900E5C0F9 /* Assets.xcassets */,
 				B25843331EC0FCD900E5C0F9 /* Info.plist */,
 			);
 			path = MyQuestions;
+			sourceTree = "<group>";
+		};
+		B260D5C41F3AABD6003388C2 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B260D5C51F3AABD6003388C2 /* QuestionCell.swift */,
+				B260D5C61F3AABD6003388C2 /* ResultCell.swift */,
+				B260D5C71F3AABD6003388C2 /* SelectCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		B260D5CB1F3AABDD003388C2 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				B260D5CC1F3AABDD003388C2 /* CategoryDB.swift */,
+				B260D5CD1F3AABDD003388C2 /* RealmDB.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		B260D5D01F3AABE2003388C2 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B260D5D11F3AABE2003388C2 /* AddCategoryViewController.swift */,
+				B260D5D21F3AABE2003388C2 /* ConfigurationViewController.swift */,
+				B260D5D31F3AABE2003388C2 /* EditViewController.swift */,
+				B260D5D41F3AABE2003388C2 /* FirstViewController.swift */,
+				B260D5D51F3AABE2003388C2 /* QuestionViewController.swift */,
+				B260D5D61F3AABE2003388C2 /* ResultQuestionViewController.swift */,
+				B260D5D71F3AABE2003388C2 /* ResultViewController.swift */,
+				B260D5D81F3AABE2003388C2 /* SecondViewController.swift */,
+				B260D5D91F3AABE2003388C2 /* SelectQuestionViewController.swift */,
+				B260D5DA1F3AABE2003388C2 /* SelectViewController.swift */,
+				B260D5DB1F3AABE2003388C2 /* StartViewController.swift */,
+				B260D5DC1F3AABE2003388C2 /* TopViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		FBFE5D9802433431C584E287 /* Pods */ = {
@@ -205,7 +243,6 @@
 				B22E321D1EDFFF3000ACC480 /* Main.storyboard in Resources */,
 				B22E32141EDC5EDF00ACC480 /* Quiz-Wrong_Buzzer02-3.mp3 in Resources */,
 				B25843321EC0FCD900E5C0F9 /* LaunchScreen.storyboard in Resources */,
-				B22E32181EDC675500ACC480 /* Geotica_2012.otf in Resources */,
 				B258432F1EC0FCD900E5C0F9 /* Assets.xcassets in Resources */,
 				B22E32161EDC5FA800ACC480 /* Quiz-Wrong_Buzzer02-2.mp3 in Resources */,
 				B22E32121EDC5BE200ACC480 /* Quiz-Correct_Answer01-1.mp3 in Resources */,
@@ -267,21 +304,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B258432A1EC0FCD900E5C0F9 /* SecondViewController.swift in Sources */,
-				B25843441EC73C7300E5C0F9 /* ConfigurationViewController.swift in Sources */,
-				B22E321A1EDD46DF00ACC480 /* ResultQuestionViewController.swift in Sources */,
-				B26183E71ED077F5006CB46A /* ResultCell.swift in Sources */,
-				B22E320E1EDBE8BA00ACC480 /* QuestionCell.swift in Sources */,
-				B25843421EC73C6500E5C0F9 /* StartViewController.swift in Sources */,
-				B258433C1EC199EF00E5C0F9 /* QuestionViewController.swift in Sources */,
-				B25843461EC7448B00E5C0F9 /* SelectQuestionViewController.swift in Sources */,
-				B2C56D6A1ECC773300B9A303 /* ResultViewController.swift in Sources */,
-				B258433E1EC58ECB00E5C0F9 /* EditViewController.swift in Sources */,
+				B260D5E31F3AABE2003388C2 /* ResultViewController.swift in Sources */,
 				B25843261EC0FCD900E5C0F9 /* AppDelegate.swift in Sources */,
-				B25843281EC0FCD900E5C0F9 /* FirstViewController.swift in Sources */,
-				B22E32101EDBF15F00ACC480 /* SelectCell.swift in Sources */,
-				B26183E91ED189DE006CB46A /* CategoryDB.swift in Sources */,
-				B258433A1EC1994C00E5C0F9 /* RealmDB.swift in Sources */,
+				B260D5DE1F3AABE2003388C2 /* ConfigurationViewController.swift in Sources */,
+				B260D5CF1F3AABDD003388C2 /* RealmDB.swift in Sources */,
+				B260D5E61F3AABE2003388C2 /* SelectViewController.swift in Sources */,
+				B260D5E41F3AABE2003388C2 /* SecondViewController.swift in Sources */,
+				B260D5E81F3AABE2003388C2 /* TopViewController.swift in Sources */,
+				B260D5C81F3AABD6003388C2 /* QuestionCell.swift in Sources */,
+				B260D5C91F3AABD6003388C2 /* ResultCell.swift in Sources */,
+				B260D5E51F3AABE2003388C2 /* SelectQuestionViewController.swift in Sources */,
+				B260D5E01F3AABE2003388C2 /* FirstViewController.swift in Sources */,
+				B260D5E71F3AABE2003388C2 /* StartViewController.swift in Sources */,
+				B260D5CE1F3AABDD003388C2 /* CategoryDB.swift in Sources */,
+				B260D5DD1F3AABE2003388C2 /* AddCategoryViewController.swift in Sources */,
+				B260D5CA1F3AABD6003388C2 /* SelectCell.swift in Sources */,
+				B260D5DF1F3AABE2003388C2 /* EditViewController.swift in Sources */,
+				B260D5E11F3AABE2003388C2 /* QuestionViewController.swift in Sources */,
+				B260D5E21F3AABE2003388C2 /* ResultQuestionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
