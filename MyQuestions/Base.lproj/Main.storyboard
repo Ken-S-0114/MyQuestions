@@ -1187,13 +1187,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="答え：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Vr-qI-khb">
-                                <rect key="frame" x="36" y="183.5" width="46" height="18"/>
+                                <rect key="frame" x="36" y="344" width="46" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4w-RT-eek">
-                                <rect key="frame" x="36" y="211.5" width="303" height="21"/>
+                                <rect key="frame" x="36" y="372" width="303" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1211,7 +1211,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qat-b5-Ogj">
-                                <rect key="frame" x="36" y="143" width="303" height="20.5"/>
+                                <rect key="frame" x="36" y="143" width="303" height="181"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1253,6 +1253,7 @@
                             <constraint firstItem="PUW-nI-gTs" firstAttribute="top" secondItem="PXR-N8-i8c" secondAttribute="bottom" constant="30" id="cjl-W6-PX0"/>
                             <constraint firstItem="9T3-H7-kr9" firstAttribute="top" secondItem="PUW-nI-gTs" secondAttribute="bottom" constant="20" id="eYg-a9-fbA"/>
                             <constraint firstItem="PUW-nI-gTs" firstAttribute="leading" secondItem="xj8-G5-hRG" secondAttribute="leadingMargin" constant="20" id="kKm-zB-lP0"/>
+                            <constraint firstItem="Qat-b5-Ogj" firstAttribute="height" secondItem="xj8-G5-hRG" secondAttribute="height" multiplier="0.3" id="nTk-MC-rpp"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
