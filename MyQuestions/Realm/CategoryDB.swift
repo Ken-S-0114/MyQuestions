@@ -11,8 +11,8 @@ import RealmSwift
 
 class CategoryDB: Object {
     
-    dynamic var id: Int = 0
-    dynamic var name: String = ""
+    @objc dynamic var id: Int = 0
+    @objc dynamic var name: String = ""
    // dynamic var color: String = ""
     
     override static func primaryKey() -> String? {

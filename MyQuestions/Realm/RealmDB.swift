@@ -11,15 +11,15 @@ import RealmSwift
 
 class RealmDB: Object {
     
-  dynamic var id: Int = 0
-  dynamic var title: String = ""
-  dynamic var question: String = ""
-  dynamic var answer: String = ""
-  dynamic var category: String = ""
-  dynamic var level: String = ""
-  dynamic var correctMark: Int = 0
-  dynamic var wrongMark: Int = 0
-  dynamic var date = NSDate()
+  @objc dynamic var id: Int = 0
+  @objc dynamic var title: String = ""
+  @objc dynamic var question: String = ""
+  @objc dynamic var answer: String = ""
+  @objc dynamic var category: String = ""
+  @objc dynamic var level: String = ""
+  @objc dynamic var correctMark: Int = 0
+  @objc dynamic var wrongMark: Int = 0
+  @objc dynamic var date = NSDate()
 
 //  convenience init(name: String) {
 //    self.init()
