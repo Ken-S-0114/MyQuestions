@@ -28,12 +28,13 @@ class ResultQuestionViewController: UIViewController {
     
     // 選択されたIDからRealmDBに保存してあるデータを表示
     let selectRealmDB = realm.object(ofType: RealmDB.self, forPrimaryKey: selectTableId as AnyObject)
-    categoryLabel.text = selectRealmDB?.category
-    titleLabel.text = selectRealmDB?.title
-    questionLabel.text = selectRealmDB?.question
-    answerLabel.text = selectRealmDB?.answer
-    levelLabel.text = selectRealmDB?.level
-    
+    if let selectRealmDB = selectRealmDB {
+      categoryLabel.text = selectRealmDB.category
+      titleLabel.text = selectRealmDB.title
+      questionLabel.text = selectRealmDB.question
+      answerLabel.text = selectRealmDB.answer
+      levelLabel.text = selectRealmDB.level
+    }
   }
   
   override func didReceiveMemoryWarning() {

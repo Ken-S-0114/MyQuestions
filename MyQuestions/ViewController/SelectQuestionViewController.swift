@@ -73,7 +73,7 @@ class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITab
   }
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    if (searchBar.text == ""){
+    if searchBar.text == "" {
       questionItem = try! Realm().objects(RealmDB.self).sorted(byKeyPath: "id", ascending: true)
       questionTableView.reloadData()
     }
@@ -136,7 +136,7 @@ class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITab
     wrongMark = Float(object.wrongMark)
     
     // nan表示にさせないための処理
-    if (object.correctMark == 0){
+    if object.correctMark == 0 {
       rate = 0.0
     }else{
       // 正答率を算出
@@ -155,7 +155,7 @@ class SelectQuestionViewController: UIViewController, UITableViewDelegate, UITab
     if selectId != [] {
       for _ in 0..<questionItem.count{
         for i in 0..<selectId.count {
-          if (indexPath.row == selectId[i]){
+          if indexPath.row == selectId[i] {
             cell.accessoryType = .checkmark
           }
         }

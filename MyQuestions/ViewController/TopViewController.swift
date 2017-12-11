@@ -56,7 +56,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     // 変更後の数
     let recount: Int = categoryItem.count
     // 変更前の数と比べる
-    if(recount != count){
+    if recount != count {
       // 配列の中身を初期化
       categoryString = []
       // CategoryDBに保存してある値を配列にあるだけ再度格納
@@ -157,7 +157,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
   }
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    if (searchBar.text == ""){
+    if searchBar.text == "" {
       questionItem = try! Realm().objects(RealmDB.self).sorted(byKeyPath: "id", ascending: true)
       categoryTableView.reloadData()
     }

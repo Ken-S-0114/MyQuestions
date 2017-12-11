@@ -32,7 +32,7 @@ class StartViewController: UIViewController, UINavigationControllerDelegate, UII
   
   override func viewWillAppear(_ animated: Bool) {
     limit = setting.integer(forKey: settingKey)
-    if appDelegate.selectId.isEmpty == false {
+    if !appDelegate.selectId.isEmpty {
       selectId = appDelegate.selectId
       selectIdLabel.text = "問題数：\(selectId.count)問"
     }
@@ -42,7 +42,7 @@ class StartViewController: UIViewController, UINavigationControllerDelegate, UII
     limitLabel.text = "正答回数：\(limit)回"
     
     // 問題が選択している場合
-    if (selectId.isEmpty == false) {
+    if !selectId.isEmpty {
       // ボタン操作を有効
       startButtonView.isEnabled = true
     }else {
@@ -65,7 +65,7 @@ class StartViewController: UIViewController, UINavigationControllerDelegate, UII
   }
   
   @IBAction func startButton(_ sender: Any) {
-    if (selectId.isEmpty == false) {
+    if !selectId.isEmpty {
       performSegue(withIdentifier: "testSegue", sender: nil)
     }
   }

@@ -75,7 +75,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
   }
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    if (searchBar.text == ""){
+    if searchBar.text == "" {
       questionItem = try! Realm().objects(RealmDB.self).sorted(byKeyPath: "id", ascending: true)
       questionTableView.reloadData()
     }
@@ -104,7 +104,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     wrongMark = Float(object.wrongMark)
     
     // nan表示にさせないための処理
-    if (object.correctMark == 0){
+    if object.correctMark == 0 {
       rate = 0.0
     }else{
       // 正答率を算出

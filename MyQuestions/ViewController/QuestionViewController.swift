@@ -46,21 +46,23 @@ class QuestionViewController: UIViewController, UITextFieldDelegate {
     super.viewDidLoad()
     limitCount = setting.integer(forKey: settingKey)
     selectId = appDelegate.selectId
-
+    
     let realm = try! Realm()
     // 選択されたIDからRealmDBに保存してあるデータを表示
     let selectRealmDB = realm.object(ofType: RealmDB.self, forPrimaryKey: selectId[i] as AnyObject)
-    categoryLabel.text = (selectRealmDB?.category)!
-    titleLabel.text = (selectRealmDB?.title)!
-    questionLabel.text = (selectRealmDB?.question)!
-    levelLabel.text = (selectRealmDB?.level)!
-    correctMark = (selectRealmDB?.correctMark)!
-    wrongMark = (selectRealmDB?.wrongMark)!
-    
+    if let selectRealmDB = selectRealmDB {
+      categoryLabel.text = selectRealmDB.category
+      titleLabel.text = selectRealmDB.title
+      questionLabel.text = selectRealmDB.question
+      levelLabel.text = selectRealmDB.level
+      correctMark = selectRealmDB.correctMark
+      wrongMark = selectRealmDB.wrongMark
+      // Realmに格納してある特定の答え
+      selectAnswer = selectRealmDB.answer
+    }
     // 答えの欄を初期化
     answerTextField.text = ""
-    // Realmに格納してある特定の答え
-    selectAnswer = (selectRealmDB?.answer)!
+    
     // 決定ボタン表示
     checkButtonView.isEnabled = true
     // 次の問題ボタン非表示
@@ -82,7 +84,7 @@ class QuestionViewController: UIViewController, UITextFieldDelegate {
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    if(answerTextField.isFirstResponder) {
+    if answerTextField.isFirstResponder {
       answerTextField.resignFirstResponder()
     }
   }
@@ -98,16 +100,16 @@ class QuestionViewController: UIViewController, UITextFieldDelegate {
   @IBOutlet weak var nextQuestionButtonView: UIBarButtonItem!
   @IBOutlet weak var checkButtonView: UIButton!
   
-
+  
   @IBAction func breakButton(_ sender: Any) {
     _ = navigationController?.popToRootViewController(animated: true)
   }
   @IBAction func nextQuestionButton(_ sender: Any) {
-    if (i < selectId.count) {
+    if i < selectId.count {
       answerCount = 1    // 回答回数
-//      correctPlayer.stop()
-//      wrong2Player.stop()
-//      wrongPlayer.stop()
+      //      correctPlayer.stop()
+      //      wrong2Player.stop()
+      //      wrongPlayer.stop()
       // 画面の再表示
       viewDidLoad()
     }else {
@@ -125,9 +127,9 @@ class QuestionViewController: UIViewController, UITextFieldDelegate {
     rateCheck = appDelegate.rateCheck
     
     // 答えが入力されているか確認
-    if (answerTextField.text != "") {
+    if answerTextField.text != "" {
       // 正解の場合
-      if (answerTextField.text == selectAnswer!) {
+      if answerTextField.text == selectAnswer! {
         // 正解BGM
         soundPlayer(&correctPlayer, path: correctPath, count: 0)
         let alertController = UIAlertController(title: "正解", message: nil, preferredStyle: .alert)
@@ -138,10 +140,10 @@ class QuestionViewController: UIViewController, UITextFieldDelegate {
         //　iPad用クラッシュさせないために
         alertController.popoverPresentationController?.sourceView = self.view;
         alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
-
+        
         present(alertController, animated: true, completion: nil)
         
-        if (rateCheck == true){
+        if rateCheck {
           // resultRealmDBに結果を蓄積
           let resultRealmDB = RealmDB()
           resultRealmDB.id = selectId[i]
@@ -171,9 +173,9 @@ class QuestionViewController: UIViewController, UITextFieldDelegate {
         nextQuestionButtonView.isEnabled = true
       }
         // 答えが間違っている場合
-      else if (answerTextField.text != selectAnswer!) {
+      else if answerTextField.text != selectAnswer! {
         // 設定した回数以内か確認
-        if (answerCount < limitCount) {
+        if answerCount < limitCount {
           // 不正解BGM
           soundPlayer(&wrong2Player, path: wrong2Path, count: 0)
           let alertController = UIAlertController(title: "不正解", message: "残りあと\((limitCount)-answerCount)回", preferredStyle: .alert)
@@ -183,7 +185,7 @@ class QuestionViewController: UIViewController, UITextFieldDelegate {
           //　iPad用クラッシュさせないために
           alertController.popoverPresentationController?.sourceView = self.view;
           alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
-
+          
           present(alertController, animated: true, completion: nil)
           answerCount += 1
           
@@ -199,10 +201,10 @@ class QuestionViewController: UIViewController, UITextFieldDelegate {
           //　iPad用クラッシュさせないために
           alertController.popoverPresentationController?.sourceView = self.view;
           alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
-
+          
           present(alertController, animated: true, completion: nil)
           
-          if (rateCheck == true){
+          if rateCheck {
             // resultRealmDBに結果を蓄積
             let resultRealmDB = RealmDB()
             resultRealmDB.id = selectId[i]
@@ -242,7 +244,7 @@ class QuestionViewController: UIViewController, UITextFieldDelegate {
         //　iPad用クラッシュさせないために
         alertController.popoverPresentationController?.sourceView = self.view;
         alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
-
+        
         present(alertController, animated: true, completion: nil)
       }
     }
@@ -263,5 +265,5 @@ class QuestionViewController: UIViewController, UITextFieldDelegate {
       print("エラーが発生しました！")
     }
   }
-
+  
 }

@@ -39,7 +39,7 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
     // 比較する変数の初期化
     i = 0
     
-    if (categoryString.isEmpty == false) {
+    if !categoryString.isEmpty {
       categoryPickerView.selectRow(0, inComponent: 0, animated: true)
       didCategorySelect = categoryString[0]!
     }
@@ -69,7 +69,7 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
     let realms = try! Realm()
     categoryItem = realms.objects(CategoryDB.self)
     
-    if (categoryString.isEmpty == false) {
+    if !categoryString.isEmpty {
       categoryPickerView.selectRow(0, inComponent: 0, animated: true)
       didCategorySelect = categoryString[0]!
     }
@@ -77,7 +77,7 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
     // 変更後の数
     let recount: Int = categoryItem.count
     // 変更前の数と比べる
-    if(recount != count){
+    if recount != count {
       // 配列の中身を初期化
       categoryString = []
       // CategoryDBに保存してある値を配列にあるだけ再度格納
@@ -129,7 +129,7 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
       
       while_i: while self.categoryItem.count > i {
         // 同じジャンル名があるかDB上でチェック
-        if (newAddCategory.name == self.categoryItem[i].name){
+        if newAddCategory.name == self.categoryItem[i].name {
           // アクションシートの親となる UIView を設定
           alert.popoverPresentationController?.sourceView = self.view
           // 吹き出しの出現箇所を CGRect で設定 （これはナビゲーションバーから吹き出しを出す例）
@@ -151,7 +151,7 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
         self.check = true
       }
       
-      if((newAddCategory.name.isEmpty == false) && (self.check == true)){
+      if !newAddCategory.name.isEmpty && self.check {
         // アクションシートの親となる UIView を設定
         alert.popoverPresentationController?.sourceView = self.view
         
@@ -183,7 +183,7 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
         self.categoryString += [object.name]
         self.didCategorySelect = self.categoryString[0]!
       }
-      else if(newAddCategory.name.isEmpty == true){
+      else if newAddCategory.name.isEmpty {
         // アクションシートの親となる UIView を設定
         alert.popoverPresentationController?.sourceView = self.view
         
@@ -248,7 +248,7 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
   // データを保存
   @IBAction func saveButton(_ sender: Any) {
     // 未入力項目がないか確認
-    if ((titleTextView.text != "") && (questionTextView.text != "") && (answerTextView.text != "") && (categoryString.isEmpty == false)){
+    if titleTextView.text != "" && questionTextView.text != "" && answerTextView.text != "" && !categoryString.isEmpty {
       
       // 新しいインスタンスを生成
       let newRealmDB = RealmDB()

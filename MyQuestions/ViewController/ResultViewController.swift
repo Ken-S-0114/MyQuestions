@@ -84,10 +84,11 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let realm = try! Realm()
     // 選択されたIdからRealmDBに保存してあるデータを表示
     let selectRealmDB = realm.object(ofType: RealmDB.self, forPrimaryKey: selectId[i] as AnyObject)
-    if let selectTitle = selectRealmDB?.title {
-      cell.setCell(number: "第\(String(describing: l))問", title: String(describing: selectTitle), mark: String(mark[indexPath.row]))
+    
+    if let selectRealmDB = selectRealmDB {
+      cell.setCell(number: "第\(String(describing: l))問", title: String(describing: selectRealmDB.title), mark: String(mark[indexPath.row]))
     }
-    if (selectId.count<l){
+    if selectId.count < l {
       l += 1    
       i += 1
     }
@@ -115,7 +116,7 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if (segue.identifier == "resultQuestionSegue") {
+    if segue.identifier == "resultQuestionSegue" {
       appDelegate.selectTableId = selectTableId
     }
   }

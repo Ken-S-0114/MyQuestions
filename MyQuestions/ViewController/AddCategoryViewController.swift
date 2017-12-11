@@ -52,7 +52,7 @@ class AddCategoryViewController: UIViewController {
     
     while_i: while categoryItem.count > i {
       // 同じジャンル名があるかDB上でチェック
-      if (newAddCategory.name == categoryItem[i].name){
+      if newAddCategory.name == categoryItem[i].name {
         // 同じ名前のジャンルが既に存在している場合
         let alertController = UIAlertController(title: "保存失敗", message: "同じ名前のジャンルが既に存在します", preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -65,7 +65,7 @@ class AddCategoryViewController: UIViewController {
       check = true
     }
     
-    if((newAddCategory.name.isEmpty == false) && (check == true)){
+    if !newAddCategory.name.isEmpty && check {
       try! realms.write({ () -> Void in
         realms.add(newAddCategory, update: false)
       })

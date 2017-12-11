@@ -41,14 +41,14 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     // 選択されたIDからRealmDBに保存してあるデータを表示
     let editRealmDB = realm.object(ofType: RealmDB.self, forPrimaryKey: selectTableId as AnyObject)
-    titleTextView.text = editRealmDB?.title
-    questionTextView.text = editRealmDB?.question
-    answerTextView.text = editRealmDB?.answer
-    if let category = editRealmDB?.category {
-      didCategorySelect = category
+    if let editRealmDB = editRealmDB {
+      titleTextView.text = editRealmDB.title
+      questionTextView.text = editRealmDB.question
+      answerTextView.text = editRealmDB.answer
+      didCategorySelect = editRealmDB.category
+      nowLabel.text = editRealmDB.level
+      levelSliderView.value = Float(editRealmDB.level)!
     }
-    nowLabel.text = editRealmDB?.level
-    levelSliderView.value = Float((editRealmDB?.level)!)!
     // Picker処理
     count = categoryItem.count
     // CategoryDBに保存してある値を配列に格納
@@ -56,7 +56,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
       let object = categoryItem[i]
       categoryString += [object.name]
       // 配列に同じジャンル名があるか検索
-      if(didCategorySelect == object.name) {
+      if didCategorySelect == object.name {
         l = i     // 同じジャンル名の配列番号記憶
       }
       i += 1
@@ -83,14 +83,14 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     // 変更後の数
     let recount: Int = categoryItem.count
     // 変更前の数と比べる
-    if(recount != count){
+    if recount != count {
       // 配列の中身を初期化
       categoryString = []
       // CategoryDBに保存してある値を配列にあるだけ再度格納
       while recount>i {
         let object = categoryItem[i]
         categoryString += [object.name]
-        if(didCategorySelect == object.name) {
+        if didCategorySelect == object.name {
           // 同じジャンル名の配列番号記憶
           l = i
         }
@@ -132,16 +132,16 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
       let newAddCategory = CategoryDB()
       //textField等に入力したデータをnewAddCategoryに代入
       newAddCategory.name = alert.textFields![0].text!
-//      //既にデータが他に作成してある場合
-//      if self.categoryItem.count != 0 {
-//        newAddCategory.id = self.categoryItem.max(ofProperty: "id")! + 1
-//      }
+      //      //既にデータが他に作成してある場合
+      //      if self.categoryItem.count != 0 {
+      //        newAddCategory.id = self.categoryItem.max(ofProperty: "id")! + 1
+      //      }
       
       //上記で代入したテキストデータを永続化
       
       while_i: while self.categoryItem.count > i {
         // 同じジャンル名があるかDB上でチェック
-        if (newAddCategory.name == self.categoryItem[i].name){
+        if newAddCategory.name == self.categoryItem[i].name {
           // アクションシートの親となる UIView を設定
           alert.popoverPresentationController?.sourceView = self.view
           // 吹き出しの出現箇所を CGRect で設定 （これはナビゲーションバーから吹き出しを出す例）
@@ -154,7 +154,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
           //　iPad用クラッシュさせないために
           alertController.popoverPresentationController?.sourceView = self.view;
           alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
-
+          
           self.present(alertController, animated: true, completion: nil)
           self.check = false
           break while_i
@@ -163,7 +163,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         self.check = true
       }
       
-      if((newAddCategory.name.isEmpty == false) && (self.check == true)){
+      if !newAddCategory.name.isEmpty && self.check {
         // アクションシートの親となる UIView を設定
         alert.popoverPresentationController?.sourceView = self.view
         
@@ -176,14 +176,14 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         //　iPad用クラッシュさせないために
         alertController.popoverPresentationController?.sourceView = self.view;
         alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
-
+        
         self.present(alertController, animated: true, completion: nil)
         
         //既にデータが他に作成してある場合
         if self.categoryItem.count != 0 {
           newAddCategory.id = self.categoryItem.max(ofProperty: "id")! + 1
         }
-
+        
         //上記で代入したテキストデータを永続化
         try! realms.write({ () -> Void in
           realms.add(newAddCategory, update: false)
@@ -192,7 +192,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
       }
     })
     alert.addAction(saveAction)
-
+    
     
     // キャンセルボタンの設定
     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -206,9 +206,9 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     //　iPad用クラッシュさせないために
     alert.popoverPresentationController?.sourceView = self.view;
     alert.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
-
+    
     present(alert, animated: true, completion: nil)
-
+    
     viewWillAppear(true)
   }
   
@@ -241,7 +241,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
   
   // データの上書き保存
   @IBAction func resaveButton(_ sender: Any) {
-    if ((titleTextView.text != "") && (questionTextView.text != "") && (answerTextView.text != "") && (categoryString.isEmpty == false)){
+    if titleTextView.text != "" && questionTextView.text != "" && answerTextView.text != "" && !categoryString.isEmpty {
       // 新しいインスタンスを生成
       let editRealmDB = RealmDB()
       // textField等に入力したデータをeditRealmDBに代入
@@ -266,7 +266,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
       //　iPad用クラッシュさせないために
       alertController.popoverPresentationController?.sourceView = self.view;
       alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
-
+      
       present(alertController, animated: true, completion: nil)
       
     }else {
@@ -278,7 +278,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
       //　iPad用クラッシュさせないために
       alertController.popoverPresentationController?.sourceView = self.view;
       alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
-
+      
       present(alertController, animated: true, completion: nil)
     }
     

@@ -31,7 +31,7 @@ class ConfigurationViewController: UIViewController, UIPickerViewDelegate, UIPic
     super.viewWillAppear(true)
     limit = setting.integer(forKey: settingKey)
     rateCheck = appDelegate.rateCheck
-    if (rateCheck == true){
+    if rateCheck {
       rateSwitchView.isOn = true
     }else{
       rateSwitchView.isOn = false
@@ -44,7 +44,7 @@ class ConfigurationViewController: UIViewController, UIPickerViewDelegate, UIPic
   @IBOutlet weak var rateSwitchView: UISwitch!
   
   @IBAction func rateSwitch(_ sender: UISwitch) {
-    if (sender.isOn){
+    if sender.isOn {
       rateCheck = true
     }else {
       rateCheck = false
