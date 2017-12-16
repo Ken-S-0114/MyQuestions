@@ -260,15 +260,20 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
       
       // 上書き保存したことを知らせるアラート表示
       let alertController = UIAlertController(title: "保存しました", message: "上書き保存しました", preferredStyle: .alert)
-      let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-      alertController.addAction(alertAction)
+      let alertAction = UIAlertAction(title: "OK", style: .default, handler:{
+        (action: UIAlertAction!) -> Void in
+        // 1つ前の画面に戻る
+        self.navigationController?.popViewController(animated: true)
+      })
       
+      alertController.addAction(alertAction)
+
       //　iPad用クラッシュさせないために
       alertController.popoverPresentationController?.sourceView = self.view;
       alertController.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
-      
+
       present(alertController, animated: true, completion: nil)
-      
+     
     }else {
       // 未入力を知らせるアラート表示
       let alertController = UIAlertController(title: "未入力項目が存在します", message: nil, preferredStyle: .alert)
