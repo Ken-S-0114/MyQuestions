@@ -158,7 +158,11 @@ class SecondViewController: UIViewController,UIPickerViewDelegate, UIPickerViewD
         // 吹き出しの出現箇所を CGRect で設定 （これはナビゲーションバーから吹き出しを出す例）
         alert.popoverPresentationController?.sourceRect = (self.navigationController?.navigationBar.frame)!
         let alertController = UIAlertController(title: "保存しました", message: nil, preferredStyle: .actionSheet)
-        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let alertAction = UIAlertAction(title: "OK", style: .default, handler:{
+          (action: UIAlertAction!) -> Void in
+          // 1つ前の画面に戻る
+//          self.navigationController?.popViewController(animated: true)
+        })
         alertController.addAction(alertAction)
         
         //　iPad用クラッシュさせないために

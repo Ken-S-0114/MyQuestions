@@ -86,9 +86,9 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let selectRealmDB = realm.object(ofType: RealmDB.self, forPrimaryKey: selectId[i] as AnyObject)
     
     if let selectRealmDB = selectRealmDB {
-      cell.setCell(number: "第\(String(describing: l))問", title: String(describing: selectRealmDB.title), mark: String(mark[indexPath.row]))
+      cell.setCell(number: "第\(String(l))問", title: String(selectRealmDB.title), mark: String(mark[indexPath.row]))
     }
-    if selectId.count < l {
+    if selectId.count > l {
       l += 1    
       i += 1
     }
